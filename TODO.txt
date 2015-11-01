@@ -1,0 +1,35 @@
+
+
+@create migration table 
+product
+customer
+order
+materials
+material update log
+@DONE
+
+
+
+@create manage materials 
+
+@move the manage materials to a module 
+
+@create manage products
+
+@move the manage products to a module 
+
+
+
+@VIEW products at dashboard
+-basic search functionality
+
+
+@view materials at dashboard
+
+
+@view customer at dashboard - with disabled 
+
+@look up
+http://x_inventory.artifectx.com/index.php/plot/
+
+

@@ -28,13 +28,30 @@ class ProductController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view', 'admin', 'delete'),
+                'actions' => array('create', 'update', 'index', 'view', 'admin', 'delete','json'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
             ),
         );
+    }
+    public function actionJson()
+    {
+        header("Content-Type: application/json");
+        $criteria = new CDbCriteria;
+        $criteria->select = "id,sku,name,description,quantity,price";
+        $jsonresultarr = array();
+        $allProducts = Product::model()->findAll($criteria);
+        foreach ($allProducts as $key => $value) {
+            $jsonresultarr[] = array(
+                    "product_name"=>$value->name,
+                    "description"=>$value->description,
+                    "quantity"=>intval($value->quantity),
+                    "unit_price"=>doubleval($value->price),
+            );
+        }
+        echo CJSON::encode($jsonresultarr);
     }
 
     /**

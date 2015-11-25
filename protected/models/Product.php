@@ -36,6 +36,7 @@ class Product extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('sku, name', 'required'),
+			array('name', 'unique'),
 			array('quantity', 'numerical', 'integerOnly'=>true),
 			array('price', 'numerical'),
 			array('sku, name, description,image', 'length', 'max'=>255),

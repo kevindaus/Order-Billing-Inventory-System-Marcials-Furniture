@@ -35,9 +35,9 @@ class Customer extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, firstname, middlename, lastname, contactNumber, address', 'required'),
+			array('title, firstname, middlename, lastname', 'required'),
 			array('title, firstname, middlename, lastname, contactNumber, address', 'length', 'max'=>255),
-			array('date_created, date_updated', 'safe'),
+			array('contactNumber, address , date_created, date_updated', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, firstname, middlename, lastname, contactNumber, address, date_created, date_updated', 'safe', 'on'=>'search'),
@@ -117,4 +117,18 @@ class Customer extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function behaviors()
+    {
+        return array(
+           'CTimestampBehavior' => array(
+               'class' => 'zii.behaviors.CTimestampBehavior',
+               'createAttribute' => 'date_created',
+               'updateAttribute' => 'date_updated',
+           )
+        );
+        
+    }
+
+
 }

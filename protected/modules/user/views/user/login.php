@@ -1,8 +1,5 @@
 <?php
 $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
-$this->breadcrumbs=array(
-	UserModule::t("Login"),
-);
 
 ?>
 <div class="span6 offset3" style="padding: 10px">

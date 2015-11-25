@@ -12,7 +12,7 @@ class m151029_215730_create_materials extends CDbMigration
 				"image"=>"string",
 				"quantity"=>"integer",
 				"last_update"=>"datetime",
-			));		
+			));
 	}
 
 	public function safeDown()

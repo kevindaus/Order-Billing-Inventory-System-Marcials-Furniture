@@ -10,6 +10,7 @@
         "phpunit/phpunit": "3.7.*",
         "phpunit/phpunit-selenium": ">=1.2",
         "phpunit/dbunit": ">=1.2",
-        "phpunit/phpunit-story": "*"
+        "phpunit/phpunit-story": "*",
+         "dompdf/dompdf" : "0.6.*"
     }
 }

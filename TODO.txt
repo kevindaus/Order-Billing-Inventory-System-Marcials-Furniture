@@ -10,26 +10,98 @@ material update log
 
 
 
-@create manage materials 
-
-@move the manage materials to a module 
-
-@create manage products
-
-@move the manage products to a module 
-
-
 
 @VIEW products at dashboard
 -basic search functionality
+@DONE
 
 
 @view materials at dashboard
+@DONE
+
+@view customer at dashboard - with restrictions
+@DONE
 
 
-@view customer at dashboard - with disabled 
+@TODO = 
+compute for sub total 
+allow user to set tax 
+allow system to compute automatically the tax
+allow user to specify shipping payment
+total = compute the total
+allow user to specify paid
+allow system to compute total due
+@DONE
 
-@look up
-http://x_inventory.artifectx.com/index.php/plot/
 
+
+
+
+@TODO  - 
+fix ship date
+@DONE
+
+@TODO - 
+fix order date
+@DONE
+
+
+@TODO - when purchase is clicked.. 
+before purchase check 
+*bill to form- @DONE
+*ship to form- @DONE
+*make sure sales person is ok - @DONE
+*ship date is ok- @DONE
+*make sure ordered products count is not zero- @DONE
+*save the information and redirect to view invoice...
+@DONE
+
+
+@TODO  - @ONGOING
+Pdf export and view of invoice 
+
+
+
+
+@TODo - view invoice . 
+show invoice information and products purchased 
+
+
+
+@TODO - 
+Add customer information 
+-	Contact Number
+
+@TODO - after invoice is created - redirect the user to 
+list of invoice , the sorting will be from latest date created
+-highlight the latest created invoice
+
+@TODO -
+fix order date_created / date_updated
+
+@TODO - view list of invoices
+
+@TODO - list invoice - show list in tables the list of invoices issued 
+
+
+@TODO - Dashboard - compute this week's sale 
+
+@TODO  - Dashboard - compute this month's sale
+-class should be reusable
+
+@TODO  - resupply button for materials . 
+allow user to update quantity of materials
+
+
+@TODO - Dashboard - compute Monthly sale
+
+
+@TODO -
+
+mag iinput lang ng materials  tapos naka specify yung mga kahoy sa respective board ft tapos ung iba pa pag isipan ko pa nga hehe wala naman magagawang process muna pero gusto ko yung pag may nagawang products kusa mag mi minus sa matrials tapos bago magawa yung isang product naka  specify yung mga matrials na gagamitin
+
+
+
+@TODO - update supply  , updates  the remaining quantioty of products 
+- this will trigger deduction of materials from materials table 
 

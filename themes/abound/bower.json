@@ -1,0 +1,23 @@
+{
+  "name": "abound",
+  "homepage": "https://github.com/kevindaus/Order-Billing-Inventory-System-Marcials-Furniture",
+  "authors": [
+    "kebyang <kelvo_link@yahoo.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs-datepicker": "~0.2.13",
+    "font-awesome": "fontawesome#~4.4.0"
+  }
+}

@@ -1,0 +1,25 @@
+
+
+harware - server 
+processor : intel pentium 4
+RAM  : 512 Mb
+
+
+hardware - client
+
+
+software - server
+Apache : 2.4.9 
+MySQL : 5.6.17 
+PHP : 5.5.12
+
+software - client 
+ 
+Compatible browsers
+ Mozilla Firefox
+ Safari
+ Microsoft Internet Explorer (9 and above)
+ Google Chrome
+
+Browser Settings
+	Make sure cookies are enabled 

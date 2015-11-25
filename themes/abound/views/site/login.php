@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
     <div class="span6 offset3">
 <?php
 	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>"Private access",
+		'title'=>"Private access - ",
 	));
 	
 ?>

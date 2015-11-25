@@ -8,8 +8,6 @@ $baseUrl = Yii::app()->theme->baseUrl;
 
 
 <div class="view">
-
-
 <h1><small><?php echo $data->name; ?></small></h1>
 <div class="">
     <div class="span3">

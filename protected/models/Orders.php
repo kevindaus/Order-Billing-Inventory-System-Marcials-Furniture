@@ -6,16 +6,24 @@
  * The followings are the available columns in table 'tbl_orders':
  * @property integer $id
  * @property integer $customer_id
- * @property integer $product_id
- * @property integer $quantity
+ * @property string $invoice_number
+ * @property double $sub_total
  * @property double $tax
- * @property double $total
+ * @property double $shipping_amt
+ * @property double $total_amt
+ * @property double $paid
+ * @property double $change
+ * @property string $sales_person
+ * @property string $shipping_address
+ * @property string $ship_date
+ * @property string $note
+ * @property string $order_date
  * @property string $date_created
  * @property string $date_updated
  *
  * The followings are the available model relations:
  * @property Customer $customer
- * @property Product $product
+ * @property ProductOrders[] $productOrders
  */
 class Orders extends CActiveRecord
 {
@@ -35,12 +43,13 @@ class Orders extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('customer_id, product_id, quantity', 'numerical', 'integerOnly'=>true),
-			array('tax, total', 'numerical'),
-			array('date_created, date_updated', 'safe'),
+			array('customer_id', 'numerical', 'integerOnly'=>true),
+			array('sub_total, tax, shipping_amt, total_amt, paid, change', 'numerical'),
+			array('invoice_number, sales_person, shipping_address', 'length', 'max'=>255),
+			array('ship_date, note, order_date, date_created, date_updated', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, customer_id, product_id, quantity, tax, total, date_created, date_updated', 'safe', 'on'=>'search'),
+			array('id, customer_id, invoice_number, sub_total, tax, shipping_amt, total_amt, paid, change, sales_person, shipping_address, ship_date, note, order_date, date_created, date_updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +62,7 @@ class Orders extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'customer' => array(self::BELONGS_TO, 'Customer', 'customer_id'),
-			'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
+			'productOrders' => array(self::HAS_MANY, 'ProductOrders', 'order_id'),
 		);
 	}
 
@@ -65,10 +74,18 @@ class Orders extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'customer_id' => 'Customer',
-			'product_id' => 'Product',
-			'quantity' => 'Quantity',
+			'invoice_number' => 'Invoice Number',
+			'sub_total' => 'Sub Total',
 			'tax' => 'Tax',
-			'total' => 'Total',
+			'shipping_amt' => 'Shipping Amt',
+			'total_amt' => 'Total Amt',
+			'paid' => 'Paid',
+			'change' => 'Change',
+			'sales_person' => 'Sales Person',
+			'shipping_address' => 'Shipping Address',
+			'ship_date' => 'Ship Date',
+			'note' => 'Note',
+			'order_date' => 'Order Date',
 			'date_created' => 'Date Created',
 			'date_updated' => 'Date Updated',
 		);
@@ -94,10 +111,18 @@ class Orders extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('customer_id',$this->customer_id);
-		$criteria->compare('product_id',$this->product_id);
-		$criteria->compare('quantity',$this->quantity);
+		$criteria->compare('invoice_number',$this->invoice_number,true);
+		$criteria->compare('sub_total',$this->sub_total);
 		$criteria->compare('tax',$this->tax);
-		$criteria->compare('total',$this->total);
+		$criteria->compare('shipping_amt',$this->shipping_amt);
+		$criteria->compare('total_amt',$this->total_amt);
+		$criteria->compare('paid',$this->paid);
+		$criteria->compare('change',$this->change);
+		$criteria->compare('sales_person',$this->sales_person,true);
+		$criteria->compare('shipping_address',$this->shipping_address,true);
+		$criteria->compare('ship_date',$this->ship_date,true);
+		$criteria->compare('note',$this->note,true);
+		$criteria->compare('order_date',$this->order_date,true);
 		$criteria->compare('date_created',$this->date_created,true);
 		$criteria->compare('date_updated',$this->date_updated,true);
 
@@ -116,4 +141,17 @@ class Orders extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function behaviors()
+    {
+        return array(
+           'CTimestampBehavior' => array(
+               'class' => 'zii.behaviors.CTimestampBehavior',
+               'createAttribute' => 'date_created',
+               'updateAttribute' => 'date_updated',
+           )
+        );
+        
+    }
+	
 }

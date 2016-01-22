@@ -9,7 +9,7 @@
 			/*'type'=>'list',*/
 			'encodeLabel'=>false,
 			'items'=>array(
-				array('label'=>'<i class="icon icon-home"></i>  Dashboard <span class="label label-info pull-right">HOME</span>', 'url'=>array('/site/index'),'itemOptions'=>array('class'=>'')),
+				array('label'=>'<i class="icon-home"></i>  Dashboard <span class="label label-info pull-right">HOME</span>', 'url'=>array('/site/index'),'itemOptions'=>array('class'=>'')),
 				array('label'=>'OPERATIONS','items'=>$this->menu
 			)
 			)));
@@ -21,7 +21,7 @@
     <?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
             'links'=>$this->breadcrumbs,
-			'homeLink'=>CHtml::link('Dashboard'),
+			'homeLink'=>CHtml::link('<i class="icon-home"></i> Dashboard'),
 			'htmlOptions'=>array('class'=>'breadcrumb')
         )); ?><!-- breadcrumbs -->
     <?php endif?>

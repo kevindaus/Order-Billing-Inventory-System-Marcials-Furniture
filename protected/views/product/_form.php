@@ -41,17 +41,19 @@
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'quantity'); ?>
-		<?php echo $form->numberField($model,'quantity'); ?>
-		<?php echo $form->error($model,'quantity'); ?>
-	</div>
-
+	<?php if ($model->isNewRecord): ?>
+		<div class="row">
+			<?php echo $form->labelEx($model,'quantity'); ?>
+			<?php echo $form->numberField($model,'quantity'); ?>
+			<?php echo $form->error($model,'quantity'); ?>
+		</div>
+	<?php endif ?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'price'); ?>
 		<?php echo $form->numberField($model,'price'); ?>
 		<?php echo $form->error($model,'price'); ?>
 	</div>
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'image'); ?>
 		<?php echo $form->fileField($model,'image',array('size'=>60,'maxlength'=>255)); ?>

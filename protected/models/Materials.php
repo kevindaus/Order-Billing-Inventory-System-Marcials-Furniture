@@ -10,6 +10,8 @@
  * @property string $description
  * @property string $image
  * @property integer $quantity
+ * @property double $cost
+ * @property string $unit_measurement
  * @property string $last_update
  *
  * The followings are the available model relations:
@@ -18,6 +20,8 @@
 class Materials extends CActiveRecord
 {
 	public $oldQuantity;
+	public $cost;
+	public $unit_measurement;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -34,13 +38,13 @@ class Materials extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, sku', 'required'),
-			array('quantity', 'numerical', 'integerOnly'=>true),
-			array('name, sku, description, image', 'length', 'max'=>255),
+			array('name, sku,quantity,unit_measurement,cost', 'required'),
+			array('quantity,cost', 'numerical', 'integerOnly'=>true,'min'=>0),
+			array('name, sku, description, image,unit_measurement', 'length', 'max'=>255),
 			array('last_update', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, sku, description, image, quantity, last_update', 'safe', 'on'=>'search'),
+			array('id, name, sku, description, image, quantity, last_update, cost , unit_measurement', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +73,8 @@ class Materials extends CActiveRecord
 			'image' => 'Image',
 			'quantity' => 'Quantity',
 			'last_update' => 'Last Update',
+			'unit_measurement' => 'Unit measurement',
+			'cost' => 'Cost',
 		);
 	}
 
@@ -97,6 +103,8 @@ class Materials extends CActiveRecord
 		$criteria->compare('image',$this->image,true);
 		$criteria->compare('quantity',$this->quantity);
 		$criteria->compare('last_update',$this->last_update,true);
+		$criteria->compare('cost',$this->cost,true);
+		$criteria->compare('unit_measurement',$this->unit_measurement,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -117,7 +125,7 @@ class Materials extends CActiveRecord
 	{
 		/*delete the image too*/
 		$uploadsPath = Yii::getPathOfAlias("uploadedImage");
-		if (!is_null($this->image)) {
+		if (!is_null($this->image) && !empty($this->image)) {
 			$imagePath = $uploadsPath.DIRECTORY_SEPARATOR.$this->image;
 			unlink($imagePath);
 		}

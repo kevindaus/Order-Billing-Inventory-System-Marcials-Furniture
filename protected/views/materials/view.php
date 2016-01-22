@@ -18,7 +18,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
 ?>
 
 
-
+<?php echo CHtml::link('<span class="icon-arrow-left"></span> Back to list', array('index'), array('class'=>'btn')); ?>
 <h1>View Material <small><?php echo $model->name; ?></small></h1>
 <div class="">
     <div class="span3">

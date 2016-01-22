@@ -37,7 +37,7 @@ class Product extends CActiveRecord
 		return array(
 			array('sku, name', 'required'),
 			array('name', 'unique'),
-			array('quantity', 'numerical', 'integerOnly'=>true),
+			array('quantity', 'numerical', 'integerOnly'=>true, 'min'=>0 , 'message'=>"Out of stock"),
 			array('price', 'numerical'),
 			array('sku, name, description,image', 'length', 'max'=>255),
 			array('date_created, date_updated', 'safe'),

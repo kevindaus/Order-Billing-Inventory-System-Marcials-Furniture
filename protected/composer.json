@@ -12,5 +12,8 @@
         "phpunit/dbunit": ">=1.2",
         "phpunit/phpunit-story": "*",
          "dompdf/dompdf" : "0.6.*"
+    },
+    "require": {
+        "nesbot/carbon": "^1.21"
     }
 }

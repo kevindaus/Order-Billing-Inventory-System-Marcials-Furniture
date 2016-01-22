@@ -89,7 +89,7 @@ class InvoiceDataPersistor {
         /*Save orders*/
         $ordersModel = $this->saveOrders($customerModel,$this->rawPostedData);
         $this->setOrderModel($ordersModel);
-        /*@TODO - save product orders*/
+
         $productOrders[] = $this->saveProductOrders($ordersModel,$this->rawPostedData['orderInformation']['ordered_products']);
         $this->setOrderProducts($productOrders);
     }

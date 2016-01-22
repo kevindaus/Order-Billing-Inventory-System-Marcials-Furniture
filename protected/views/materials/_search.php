@@ -42,6 +42,20 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'unit_measurement'); ?>
+		<?php echo $form->fileField($model,'unit_measurement',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'unit_measurement'); ?>
+	</div>
+
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'cost'); ?>
+		<?php echo $form->fileField($model,'cost',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'cost'); ?>
+	</div>
+
+
+	<div class="row">
 		<?php echo $form->label($model,'last_update'); ?>
 		<?php echo $form->textField($model,'last_update'); ?>
 	</div>
@@ -49,6 +63,8 @@
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
+
+
 
 <?php $this->endWidget(); ?>
 

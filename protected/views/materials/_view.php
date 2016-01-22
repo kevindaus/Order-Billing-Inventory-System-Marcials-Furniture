@@ -8,7 +8,26 @@ $baseUrl = Yii::app()->theme->baseUrl;
 
 
 <div class="view">
-<h1><small><?php echo $data->name; ?></small></h1>
+<h1>
+    <div>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="#">
+            <i class="icon-book icon-white"></i>
+            Action
+        </a>
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+                <?php echo CHtml::link('<i class="icon-pencil"></i> Update', array('update','id'=>$data->id), array()); ?>
+            </li>
+            <li>
+                <?php echo CHtml::link('<i class="icon-trash"></i> Delete', array('delete','id'=>$data->id), array()); ?>
+            </li>
+          </ul>
+        </div>            
+    </div>
+
+</h1>
 <div class="">
     <div class="span3">
         <?php
@@ -19,6 +38,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
         }
         
         ?>
+        <br>
     </div>
     <div class="span9">
         <?php $this->widget('zii.widgets.CDetailView', array(
@@ -27,8 +47,10 @@ $baseUrl = Yii::app()->theme->baseUrl;
 				'name',
 				'sku',
 				'description',
-				'image',
-				'quantity',
+				// 'image',
+                'quantity',
+                'unit_measurement',
+				'cost',
             ),
         ));
         ?>

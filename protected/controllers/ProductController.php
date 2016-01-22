@@ -28,7 +28,7 @@ class ProductController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view', 'admin', 'delete','json'),
+                'actions' => array('create', 'update', 'index', 'view', 'admin', 'delete','json','resupply','requirement'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -53,15 +53,64 @@ class ProductController extends Controller
         }
         echo CJSON::encode($jsonresultarr);
     }
+    public function actionResupply($product_id)
+    {
+        $model = Product::model()->findByPk($product_id);
+        if ($model) {
+            if (Yii::app()->request->isPostRequest) {
+                $oldQuantity = intval($model->quantity);
 
+                /*run for n specified number off quantity to be added*/
+                for ($i=0; $i < intval($_POST['quantityToBeAdded']); $i++) {
+                    $productRequirements = ProductRequirement::model()->findAllByAttributes(array('product_id'=>$product_id));
+                    $updateMaterialsLater = array();
+                    foreach ($productRequirements as $key => $currentProductRequirement) {
+                        $currentMaterial = $currentProductRequirement->material;
+                        if ($currentMaterial) {
+                            $currentMaterial->quantity = intval($currentMaterial->quantity) - $currentProductRequirement->quantity;
+                            if ($currentMaterial->validate()) {
+                                $updateMaterialsLater[] = $currentMaterial;
+                            }else{
+                                if ($i !== 0) {
+                                    $neededMaterialsQuantity = intval($currentProductRequirement->quantity) * intval($_POST['quantityToBeAdded']);
+                                    $tempMessage = sprintf("We can't continue updating the quantity there seem to have a shortage in %s. To continue please update quantity of %s to atleast %s piece(s)", $currentMaterial->name,$currentMaterial->name,$neededMaterialsQuantity);
+                                    Yii::app()->user->setFlash("info",$tempMessage);
+                                    $this->redirect(Yii::app()->request->requestUri);                                    
+                                }else{
+                                    $neededMaterialsQuantity = intval($currentProductRequirement->quantity) * intval($_POST['quantityToBeAdded']);
+                                    Yii::app()->user->setFlash("error","<strong>Insufficient materials </strong>: More $currentMaterial->name is required. You need atleast ".$neededMaterialsQuantity ." piece(s)");
+                                    $this->redirect(Yii::app()->request->requestUri);
+                                }
+                            }
+                        }else{
+                            /*if material doesnt exists anymore , delete this requirement also*/
+                            $currentProductRequirement->delete();//continue as usual
+                        }
+                    }
+                    foreach ($updateMaterialsLater as $key => $value) {
+                        $value->save();//finally update the quantity of materials
+                    }
+                    $model->quantity = intval($model->quantity) + 1;
+                    $model->save();
+                }
+                Yii::app()->user->setFlash("success","Number of available $model->name is updated :<br>From $oldQuantity to $model->quantity");
+                $this->redirect(Yii::app()->request->requestUri);
+            }
+            $this->render('resupply',compact('model'));
+        }else{
+            throw new CHttpException(404,"Material doesnt exists in the database");
+        }        
+    }
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id)
     {
+        $requiredMaterials = ProductRequirement::model()->findAllByAttributes(array("product_id"=>$id));
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'requiredMaterials' => $requiredMaterials,
         ));
     }
 
@@ -85,16 +134,22 @@ class ProductController extends Controller
                 /*generate random name*/
                 $model->image = sprintf("%s-%s", uniqid() . '-product-', $uploadedFile);
                 /*save model*/
-                $model->save();
+                // $model->save();
                 /*save the uploaded file to */
                 $uploadPath = Yii::getPathOfAlias("uploadedImage") . '/' . $model->image;
                 $uploadedFile->saveAs($uploadPath);
             }
 
-            if ($model->save()) {
+            if ($model->isNewRecord && $model->save()) {
+                $this->redirect(array('/product/requirement', 'product_id' => $model->id));
+            }else if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->id));
             }
 
+        }else{
+            if (empty($model->sku)) {
+                $model->sku = uniqid();
+            }
         }
 
         $this->render('create', array(
@@ -158,6 +213,7 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = "column1";
         $dataProvider = new CActiveDataProvider('Product');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
@@ -178,7 +234,31 @@ class ProductController extends Controller
             'model' => $model,
         ));
     }
-
+    /**
+     * Allow user to define what materials are needed to create a product
+     */
+    public function actionRequirement($product_id)
+    {
+        $model = Product::model()->findByPk($product_id);
+        if ($model) {
+            if (Yii::app()->request->isPostRequest) {
+                /*@TODO - for each required material */
+                foreach ($_POST['required_material_id'] as $key => $value) {
+                    $new_product_requirement = new ProductRequirement;
+                    $new_product_requirement->product_id = $model->id;
+                    $new_product_requirement->material_id = $_POST['required_material_id'][$key];
+                    $new_product_requirement->quantity = $_POST['required_material_quantity'][$key];
+                    /*@TODO - save ProductRequirement*/
+                    $new_product_requirement->save();
+                }
+                Yii::app()->user->setFlash("success","Settings saved!");
+                $this->redirect(array('view', 'id' => $model->id));
+            }
+        }else{
+            throw new CHttpException(404,"Product doesnt exists in the database");
+        }
+        $this->render('requirement', compact('model'));
+    }
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
@@ -205,4 +285,5 @@ class ProductController extends Controller
             Yii::app()->end();
         }
     }
+
 }

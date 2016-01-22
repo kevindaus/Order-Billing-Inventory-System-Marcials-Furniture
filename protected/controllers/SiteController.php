@@ -1,5 +1,7 @@
 <?php
 
+
+use Carbon\Carbon;
 class SiteController extends Controller
 {
 
@@ -22,7 +24,7 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('error','login','logout'),
+				'actions'=>array('error','login','logout','test'),
 				'users'=>array('*'),
 			),
 			array('allow',
@@ -41,17 +43,36 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$weeklySalesReport = new WeeklySalesReport;
+		$thisWeeksSale = $weeklySalesReport->getCurrentWeekSales();
+
+		$monthlySalesReport = new MonthlySalesReport;
+		$wholeMonthSale = $monthlySalesReport->getThisMonthsReport();
+
+		$annualReportObj = new AnnualReport;
+		$annualMonthlyReport = $annualReportObj->getAnnualMonthlyReport();
+
 		$productModel=new Product('search');
 		$productModel->unsetAttributes();
 		if(isset($_GET['Product'])){
 			$productModel->attributes=$_GET['Product'];
 		}
+
 		$materialModel=new Materials('search');
 		$materialModel->unsetAttributes();
 		if(isset($_GET['Materials'])){
 			$materialModel->attributes=$_GET['Materials'];		
 		}
-		$this->render('index',compact('productModel','materialModel'));
+		$this->render('index',
+			compact(
+				'productModel',
+				'materialModel',
+				'thisWeeksSale',
+				'wholeWeekReport',
+				'wholeMonthSale',
+				'annualMonthlyReport'
+			)
+		);
 	}
 
 	/**
@@ -82,5 +103,15 @@ class SiteController extends Controller
 	public function actionLogout()
 	{
 		$this->redirect(array('user/logout'));
+	}
+
+	public function actionTest()
+	{
+		$yearToday = date("Y");
+		$monthName = "February";
+		$dateFromStr = sprintf("first day of %s %s", $monthName , $yearToday);
+		$dateToStr = sprintf("last day of %s %s", $monthName,$yearToday);
+		var_dump((string) Carbon::parse($dateFromStr));
+		var_dump((string) Carbon::parse($dateToStr));
 	}
 }

@@ -28,6 +28,7 @@ return array(
         'application.modules.rights.components.*',
         'application.libs.invoice.*',
         'application.libs.products.*',
+        'application.libs.dashboard.*',
     ),
     'modules' => array(
         'user'=>array(
@@ -116,8 +117,8 @@ return array(
             'class' => 'CLogRouter',
             'routes' => array(
                 array(
-                    'class' => 'CFileLogRoute',
-                    // 'class' => 'CWebLogRoute',
+                    // 'class' => 'CFileLogRoute',
+                    'class' => 'CWebLogRoute',
                     'levels' => 'error, warning',
                 ),
             // uncomment the following to show log messages on web pages

@@ -11,6 +11,8 @@ class m151029_215730_create_materials extends CDbMigration
 				"description"=>"string",
 				"image"=>"string",
 				"quantity"=>"integer",
+				"unit_measurement"=>"string",
+				"cost"=>"double",//cost
 				"last_update"=>"datetime",
 			));
 	}

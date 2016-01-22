@@ -57,7 +57,7 @@ $dateToday = date("F d,Y");
 				<br>
 				<strong>Date : <?php echo $dateToday ?></strong>
 				<br>
-				<strong ng-model="orderInformation.invoice_number" ng-init="'<?php echo uniqid() ?>'">Invoice # : {{orderInformation.invoice_number}}</strong>
+				<strong ng-model="orderInformation.invoice_number" ng-init="orderInformation.invoice_number='<?php echo uniqid() ?>'">Invoice # : {{::orderInformation.invoice_number}}</strong>
 			</div>
 		</div>
 		<div class='row'>

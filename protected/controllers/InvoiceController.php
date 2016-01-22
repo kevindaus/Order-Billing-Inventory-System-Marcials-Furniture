@@ -55,7 +55,7 @@ class InvoiceController extends Controller
     }
 
     public function actionCreate(){
-
+        $this->layout = "invoice";
         $this->render('create');
     }
     public function actionForm()
@@ -98,34 +98,16 @@ class InvoiceController extends Controller
         if (!$ordermodel) {
             throw new CHttpException(404,"Sorry we cant find that invoice number. Cause : it doesnt exists in our record");
         }else{
-            echo "generating pdf please wait <br>";
-            echo "$id";            
+            $dompdf = new DOMPDF();
+            $htmlOutput = $this->renderPartial('view', array('model'=>$ordermodel),true);
+            $dompdf->load_html($htmlOutput);
+            $dompdf->render();
+            $fileName= sys_get_temp_dir().uniqid("invoice").".pdf";
+            file_put_contents($fileName , $dompdf->output());
+            $outputFile = Yii::app()->assetManager->publish($fileName);
+            $this->redirect($outputFile);            
         }
 
     }
-    public function actionView()
-    {
-        $model = Orders::model()->find();
-        $this->layout = "empty";
-
-
-        // $this->render('view', array('model'=>$model));
-        // Yii::app()->end();
-        // 
-
-
-        /*prepare DOM pdf*/
-        $dompdf = new DOMPDF();
-        // $dompdf->set_paper("a4", "landscape");
-        $htmlOutput = $this->renderPartial('view', array('model'=>$model),true);
-        $dompdf->load_html($htmlOutput);
-        $dompdf->render();
-        $fileName= sys_get_temp_dir().uniqid("asdasd").".pdf";
-        file_put_contents($fileName , $dompdf->output());
-        $outputFile = Yii::app()->assetManager->publish($fileName);
-        $this->redirect($outputFile);
-        /*output pdf*/
-    }
-
 
 }

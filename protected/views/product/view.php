@@ -16,10 +16,27 @@ $this->menu = array(
 );
 
 $baseUrl = Yii::app()->theme->baseUrl; 
-?>
 
-<h1>View Product <small><?php echo $model->name; ?></small></h1>
-<div class="">
+
+?>
+<div style="margin-left: 33px;"> 
+
+<div class="row">
+    <div class="span8">
+        <h1>View Product <small><?php echo $model->name; ?></small></h1>
+        <?php
+            $this->widget('bootstrap.widgets.TbAlert', array(
+                'fade'=>true, 
+                'closeText'=>'×',
+                'alerts'=>array(
+                    'error'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'),
+                    'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'),
+                ),
+            )); 
+        ?>
+    </div>
+</div>
+<div class="row">
     <div class="span3">
         <?php
             if (isset($model->image) && !empty($model->image)) {
@@ -30,7 +47,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
         
         ?>
     </div>
-    <div class="span9">
+    <div class="span8">
         <?php $this->widget('zii.widgets.CDetailView', array(
             'data' => $model,
             'attributes' => array(
@@ -43,9 +60,27 @@ $baseUrl = Yii::app()->theme->baseUrl;
                 'date_updated',
             ),
         ));
-
         ?>
-        
     </div>
 </div>
+<div class='row'>
+    <h3>Required materials : </h3>
+    <ul>
+        <?php foreach ($requiredMaterials as $key => $currentRequiredMaterial): ?>
+            <li>
+                <h4>
+                    <?php echo $currentRequiredMaterial->material->name ?> 
+                    - 
+                    <small>
+                    <?php 
+                        echo $currentRequiredMaterial->quantity 
+                    ?> piece(s)
+                    </small>
+                    
+                </h4>
+            </li>
+        <?php endforeach ?>
+    </ul>
+</div>
 
+</div>

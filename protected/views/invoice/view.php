@@ -147,94 +147,94 @@ Customer Information:<br>
 <br>
 </p>
 
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width="100%"
- style='width:50%;border-collapse:collapse;border:none'>
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 
+ style='width:700px;border-collapse:collapse;border:none'>
  <tr>
-  <td width=367 colspan=2 style='width:275.4pt;border:solid windowtext 1.0pt;
+  <td colspan=2 style='border:solid windowtext 1.0pt;
   background:#E6E6E6;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><b>Billing Address:</b></p>
   </td>
-  <td width=367 colspan=2 style='width:275.4pt;border:solid windowtext 1.0pt;
+  <td colspan=2 style='border:solid windowtext 1.0pt;
   border-left:none;background:#E6E6E6;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><b>Shipping Address:</b></p>
   </td>
  </tr>
  <tr>
-  <td width=115 style='width:1.2in;border:solid windowtext 1.0pt;border-top:
+  <td style='border:solid windowtext 1.0pt;border-top:
   none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:8.0pt'>Company:</span></p>
   </td>
-  <td width=252 style='width:189.0pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal><span style='font-size:12.0pt'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:12.0pt'>--n/a--</span></p>
   </td>
-  <td width=108 style='width:81.0pt;border-top:none;border-left:none;
+  <td  style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:8.0pt'>Company:</span></p>
   </td>
-  <td width=259 style='width:2.7in;border-top:none;border-left:none;border-bottom:
+  <td style='border-top:none;border-left:none;border-bottom:
   solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal><span style='font-size:12.0pt'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:12.0pt'>--n/a--</span></p>
   </td>
  </tr>
  <tr>
-  <td width=115 style='width:1.2in;border:solid windowtext 1.0pt;border-top:
+  <td  style='border:solid windowtext 1.0pt;border-top:
   none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:8.0pt'>Name:</span></p>
   </td>
-  <td width=252 style='width:189.0pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'><?php echo sprintf("%s. %s %s",$model->customer->title,$model->customer->firstname , $model->customer->lastname) ?></span></p>
   </td>
-  <td width=108 style='width:81.0pt;border-top:none;border-left:none;
+  <td  style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:8.0pt'>Name:</span></p>
   </td>
-  <td width=259 style='width:2.7in;border-top:none;border-left:none;border-bottom:
+  <td  style='border-top:none;border-left:none;border-bottom:
   solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>
       <p class=MsoNormal><span style='font-size:12.0pt'><?php echo sprintf("%s. %s %s",$model->customer->title,$model->customer->firstname , $model->customer->lastname) ?></span></p>
   </td>
  </tr>
  <tr>
-  <td width=115 style='width:1.2in;border:solid windowtext 1.0pt;border-top:
+  <td  style='border:solid windowtext 1.0pt;border-top:
   none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:8.0pt'>Address:</span></p>
   </td>
-  <td width=252 style='width:189.0pt;border-top:none;border-left:none;
+  <td  style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'><?php echo $addressPart1?>;</span></p>
   </td>
-  <td width=108 style='width:81.0pt;border-top:none;border-left:none;
+  <td  style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:8.0pt'>Address:</span></p>
   </td>
-  <td width=259 style='width:2.7in;border-top:none;border-left:none;border-bottom:
+  <td  style='border-top:none;border-left:none;border-bottom:
   solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>
       <p class=MsoNormal><span style='font-size:12.0pt'><?php echo $addressPart1?>;</span></p>
   </td>
  </tr>
  <tr>
-  <td width=115 style='width:1.2in;border:solid windowtext 1.0pt;border-top:
+  <td  style='border:solid windowtext 1.0pt;border-top:
   none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:8.0pt'>&nbsp;</span></p>
   </td>
-  <td width=252 style='width:189.0pt;border-top:none;border-left:none;
+  <td  style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
       <p class=MsoNormal><span style='font-size:12.0pt'><?php echo $addressPart2?>;</span></p>
   </td>
-  <td width=108 style='width:81.0pt;border-top:none;border-left:none;
+  <td  style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:8.0pt'>&nbsp;</span></p>
   </td>
-  <td width=259 style='width:2.7in;border-top:none;border-left:none;border-bottom:
+  <td  style='border-top:none;border-left:none;border-bottom:
   solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>
       <p class=MsoNormal><span style='font-size:12.0pt'><?php echo $addressPart2?>;</span></p>
   </td>
@@ -244,14 +244,13 @@ Customer Information:<br>
 
 <p class=MsoNormal>&nbsp;</p>
 
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width="50%"
- style='width:100.0%;border-collapse:collapse;border:none'>
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 
+ style=';border-collapse:collapse;border:none'>
  <tr>
-  <td width=343 style='width:257.4pt;border:none;padding:0in 5.4pt 0in 5.4pt'>
+  <td  style='border:none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal>&nbsp;</p>
   </td>
-  <td width=132 style='width:99.0pt;border:none;border-right:solid windowtext 1.0pt;
-  padding:0in 5.4pt 0in 5.4pt'>
+  <td  style='border:none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><b></b></p>
   </td>
  </tr>
@@ -262,23 +261,21 @@ Order Information:<br>
 <br>
 </p>
 
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width="50%"
- style='width:100.0%;border-collapse:collapse;border:none'>
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0  style='width:700px;border-collapse:collapse;border:none'>
  <tr>
-  <td width=91 style='width:.95in;border:solid windowtext 1.0pt;background:
-  #E6E6E6;padding:0in 5.4pt 0in 5.4pt'>
+  <td style='border:solid windowtext 1.0pt;background:#E6E6E6;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=center style='text-align:center'><b>Qty</b></p>
   </td>
-  <td width=348 style='width:261.0pt;border:solid windowtext 1.0pt;border-left:
+  <td style='border:solid windowtext 1.0pt;border-left:
   none;background:#E6E6E6;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=center style='text-align:center'><b>Product
   Description</b></p>
   </td>
-  <td width=152 style='width:114.0pt;border:solid windowtext 1.0pt;border-left:
+  <td style='border:solid windowtext 1.0pt;border-left:
   none;background:#E6E6E6;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=center style='text-align:center'><b>Amount Each</b></p>
   </td>
-  <td width=151 style='width:113.4pt;border:solid windowtext 1.0pt;border-left:
+  <td style='border:solid windowtext 1.0pt;border-left:
   none;background:#E6E6E6;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=center style='text-align:center'><b>Amount</b></p>
   </td>
@@ -287,20 +284,20 @@ Order Information:<br>
 <?php foreach ($model->productOrders as $key => $currentProductOrders): ?>
 
  <tr>
-  <td width=91 style='width:.95in;border:solid windowtext 1.0pt;border-top:
+  <td style='border:solid windowtext 1.0pt;border-top:
   none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'>
   <?php echo $currentProductOrders->quantity ?>
   </span></p>
   </td>
-  <td width=348 style='width:261.0pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'>
   <?php echo $currentProductOrders->product->name ?>
   </span></p>
   </td>
-  <td width=152 style='width:114.0pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><span
@@ -308,7 +305,7 @@ Order Information:<br>
   <?php echo $currentProductOrders->product->price ?>
   </span></p>
   </td>
-  <td width=151 style='width:113.4pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><span
@@ -325,21 +322,18 @@ Order Information:<br>
 
 
  <tr>
-  <td width=91 style='width:.95in;border:none;padding:0in 5.4pt 0in 5.4pt'>
+  <td style='border:none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'></span></p>
   </td>
-  <td width=348 style='width:261.0pt;border:none;border-right:solid windowtext 1.0pt;
-  padding:0in 5.4pt 0in 5.4pt'>
+  <td style='border:none;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'>&nbsp;</span></p>
   </td>
-  <td width=152 style='width:114.0pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  <td style='border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><span
   style='font-size:8.0pt'>Subtotal:</span></p>
   </td>
-  <td width=151 style='width:113.4pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  <td style='border-top:none;border-left:none;  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><span
   style='font-size:12.0pt'><?php echo $model->sub_total ?></span></p>
@@ -350,20 +344,20 @@ Order Information:<br>
 
 
  <tr>
-  <td width=91 style='width:.95in;border:none;padding:0in 5.4pt 0in 5.4pt'>
+  <td style='border:none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'>&nbsp;</span></p>
   </td>
-  <td width=348 style='width:261.0pt;border:none;border-right:solid windowtext 1.0pt;
+  <td style='border:none;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'>&nbsp;</span></p>
   </td>
-  <td width=152 style='width:114.0pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><span
-  style='font-size:8.0pt'>Tax: </span></p>
+  style='font-size:8.0pt'>Tax (<?php echo $model->tax ?>) % : </span></p>
   </td>
-  <td width=151 style='width:113.4pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><span
@@ -371,20 +365,20 @@ Order Information:<br>
   </td>
  </tr>
  <tr>
-  <td width=91 style='width:.95in;border:none;padding:0in 5.4pt 0in 5.4pt'>
+  <td style='border:none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'>&nbsp;</span></p>
   </td>
-  <td width=348 style='width:261.0pt;border:none;border-right:solid windowtext 1.0pt;
+  <td style='border:none;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'>&nbsp;</span></p>
   </td>
-  <td width=152 style='width:114.0pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><span
   style='font-size:8.0pt'>Shipping:</span></p>
   </td>
-  <td width=151 style='width:113.4pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><span
@@ -392,19 +386,19 @@ Order Information:<br>
   </td>
  </tr>
  <tr>
-  <td width=91 style='width:.95in;border:none;padding:0in 5.4pt 0in 5.4pt'>
+  <td style='border:none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal>&nbsp;</p>
   </td>
-  <td width=348 style='width:261.0pt;border:none;border-right:solid windowtext 1.0pt;
+  <td style='border:none;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal>&nbsp;</p>
   </td>
-  <td width=152 style='width:114.0pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><b>Grand Total:</b></p>
   </td>
-  <td width=151 style='width:113.4pt;border-top:none;border-left:none;
+  <td style='border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal align=right style='text-align:right'><?php echo $model->total_amt ?></p>
@@ -417,15 +411,15 @@ Order Information:<br>
 </p>
 
 <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none'>
+ style='width:700px;border-collapse:collapse;border:none'>
  <tr>
-  <td width=734 style='width:7.65in;border:solid windowtext 1.0pt;background:
+  <td style='border:solid windowtext 1.0pt;background:
   #E6E6E6;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><b>Notes:</b></p>
   </td>
  </tr>
  <tr>
-  <td width=734 style='width:7.65in;border:solid windowtext 1.0pt;border-top:
+  <td style='border:solid windowtext 1.0pt;border-top:
   none;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt'><?php echo $model->note ?></span></p>
   <p class=MsoNormal><span style='font-size:12.0pt'>&nbsp;</span></p>

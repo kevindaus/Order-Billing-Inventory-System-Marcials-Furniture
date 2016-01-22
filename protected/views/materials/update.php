@@ -15,7 +15,7 @@ $this->menu=array(
 	array('label'=>'Manage Material', 'url'=>array('admin')),
 );
 ?>
-
+<?php echo CHtml::link('<span class="icon-arrow-left"></span> Back to list', array('index'), array('class'=>'btn')); ?>
 <h1>Update Materials <?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

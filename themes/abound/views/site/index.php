@@ -30,26 +30,34 @@ Yii::app()->clientScript->registerCss('labelscss', '
 
 
 
+
+
 ?>
 
 
 <div class="row-fluid">
-    <div class="span3 offset2 well">
+    <div class="span4 offset1 well">
         <div class="span4">
             <?php echo CHtml::image($baseUrl.'/img/Actions-view-calendar-week-icon.png', 'alt'); ?>
         </div>
         <div class="span8">
-            <div class="upper-label"> <?php echo Yii::app()->numberFormatter->formatCurrency(5000, 'PHP') ?></div>
+            <div class="upper-label"> 
+                <?php echo Yii::app()->numberFormatter->formatCurrency($thisWeeksSale, 'P') ?>
+            </div>
             <div class="upper-label-description">This Week's Sale</div>
         </div>
     </div>
-    <div class="span3 well">
+    <div class="span4 well">
         <div class="span4">
             <?php echo CHtml::image($baseUrl.'/img/Actions-view-calendar-month-icon.png', 'alt'); ?>
         </div>
         <div class="span8">
-            <div class="upper-label"> <div class="upper-label"> <?php echo Yii::app()->numberFormatter->formatCurrency(123456, 'PHP') ?></div></div>
-            <div class="upper-label-description">This Monht's Sale</div>
+            <div class="upper-label"> 
+            <div class="upper-label"> 
+            <?php echo Yii::app()->numberFormatter->formatCurrency($wholeMonthSale, 'P') ?>
+            </div>
+            </div>
+            <div class="upper-label-description">This Month's Sale</div>
         </div>
     </div>
 </div>
@@ -69,27 +77,25 @@ Yii::app()->clientScript->registerCss('labelscss', '
 
         <?php $this->widget('yiiwheels.widgets.grid.WhGridView', array(
             'id'=>'materials-grid',
+            'ajaxUpdate'=>false,
             'itemsCssClass'=>'table-bordered table-stripped',
             'dataProvider'=>$materialModel->search(),
             'filter'=>$materialModel,
             'columns'=>array(
-                // 'id',
                 'name',
                 'sku',
-                'quantity',
                 array(
-                    'class'=>'CButtonColumn',
-                    'header'=>'Action',
-                    'template'=>'{view}{update}{delete}',
-                    'viewButtonUrl'=>'Yii::app()->controller->createUrl("materials/view",array("id"=>$data->primaryKey))',
-                    'updateButtonUrl'=>'Yii::app()->controller->createUrl("materials/update",array("id"=>$data->primaryKey))',
-                    'deleteButtonUrl'=>'Yii::app()->controller->createUrl("materials/delete",array("id"=>$data->primaryKey))',
+                        'header'=>"Quantity",
+                        'type'=>"raw",
+                        'name'=>"quantity",
+                        'value'=>'$data->quantity .\' \'. $data->unit_measurement',
+                    ),
+                'cost',
+                array(
+                    'header'=>'Update supply',
+                    'type'=>'raw',
+                    'value'=>'CHtml::link("<span class=\' icon-repeat\'></span>", array(\'materials/resupply\',\'material_id\'=>$data->id))',
                 ),
-                /*
-                'description',
-                'image',
-                'last_update',
-                */
             ),
         )); ?>
         
@@ -107,7 +113,7 @@ Yii::app()->clientScript->registerCss('labelscss', '
 
         <?php $this->widget('yiiwheels.widgets.grid.WhGridView', array(
             'id'=>'product-grid',
-            // 'itemsCssClass'=>' table-bordered table-stripped',
+            'ajaxUpdate'=>false,
             'dataProvider'=>$productModel->search(),
             'filter'=>$productModel,
             'columns'=>array(
@@ -122,6 +128,11 @@ Yii::app()->clientScript->registerCss('labelscss', '
                 // 'name',
                 // 'quantity',
                 'price',
+                array(
+                    'header'=>'Update supply',
+                    'type'=>'raw',
+                    'value'=>'CHtml::link("<span class=\' icon-repeat\'></span>", array(\'product/resupply\',\'product_id\'=>$data->id))',
+                ),
                 array(
                     'class'=>'CButtonColumn',
                     'viewButtonUrl'=>'Yii::app()->controller->createUrl("product/view",array("id"=>$data->primaryKey))',
@@ -171,7 +182,10 @@ Yii::app()->clientScript->registerCss('labelscss', '
                             'title' => array('text' => 'Sale')
                         ),
                         'series' => array(
-                            array('name' => 'Sale', 'data' => array(15000, 7000, 3000,200,5000,7800,800,35000,500)),
+                            array(
+                                'name' => 'Sale', 
+                                'data' => array_values($annualMonthlyReport)
+                                ),
                         )
                     )
                 )
@@ -179,16 +193,7 @@ Yii::app()->clientScript->registerCss('labelscss', '
         ?>
 
         <?php $this->endWidget(); ?>
-    </div><!--/span-->
-    <!--<div class="span2">
-        <input class="knob" data-width="100" data-displayInput=false data-fgColor="#5EB95E" value="35">
     </div>
-    <div class="span2">
-        <input class="knob" data-width="100" data-cursor=true data-fgColor="#B94A48" data-thickness=.3 value="29">
-    </div>
-    <div class="span2">
-         <input class="knob" data-width="100" data-min="-100" data-fgColor="#F89406" data-displayPrevious=true value="44">      
-    </div><!--/span-->
 </div><!--/row-->
 
           

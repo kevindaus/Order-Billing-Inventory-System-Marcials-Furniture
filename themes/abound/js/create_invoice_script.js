@@ -211,7 +211,7 @@
                 }
                 $scope.isSendingPurchaseRequest = true;
                 $timeout(function () {
-                    // window.location.href = baseUrl + '/invoice/list';
+                    window.location.href = baseUrl + '/invoice/list';
                 }, 500);
             }, function () {
                 alert('Sorry I cant send your data now. ');

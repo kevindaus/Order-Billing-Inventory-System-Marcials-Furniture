@@ -57,51 +57,123 @@ before purchase check
 @DONE
 
 
-@TODO  - @ONGOING
+@TODO  -
 Pdf export and view of invoice 
-
+@DONE
 
 
 
 @TODo - view invoice . 
 show invoice information and products purchased 
+@DONE
 
 
 
 @TODO - 
 Add customer information 
 -	Contact Number
+@DONE
+
 
 @TODO - after invoice is created - redirect the user to 
 list of invoice , the sorting will be from latest date created
 -highlight the latest created invoice
+@TODO
+
 
 @TODO -
 fix order date_created / date_updated
+@DONE
+
 
 @TODO - view list of invoices
-
-@TODO - list invoice - show list in tables the list of invoices issued 
+@DONE
 
 
 @TODO - Dashboard - compute this week's sale 
+@DONE
 
 @TODO  - Dashboard - compute this month's sale
 -class should be reusable
+@DONE
 
-@TODO  - resupply button for materials . 
-allow user to update quantity of materials
+
+
+
+@TODO - product quantity validation . must always be positive
+@DONE
+
 
 
 @TODO - Dashboard - compute Monthly sale
+@DONE
+
+@TODO  - resupply button for materials . 
+allow user to update quantity of materials
+@DONE
 
 
 @TODO -
-
-mag iinput lang ng materials  tapos naka specify yung mga kahoy sa respective board ft tapos ung iba pa pag isipan ko pa nga hehe wala naman magagawang process muna pero gusto ko yung pag may nagawang products kusa mag mi minus sa matrials tapos bago magawa yung isang product naka  specify yung mga matrials na gagamitin
-
+mag iinput lang ng materials  tapos naka specify yung mga kahoy sa respective 
+board ft tapos ung iba pa pag isipan ko pa nga hehe wala naman magagawang process muna pero gusto ko yung pag may nagawang 
+products kusa mag mi minus sa matrials tapos bago magawa yung isang product naka  specify yung mga matrials na gagamitin
+@DONE
 
 
 @TODO - update supply  , updates  the remaining quantioty of products 
 - this will trigger deduction of materials from materials table 
+@DONE
+
+
+
+
+@TODO  - show error if material supply are not enough
+@DONE
+
+
+
+@TODO - 
+add unit of measurement for material
+
+
+@TODO  -
+add price
+and label it cost
+
+ongoing 
+http://localhost:8080/index.php/materials/index
+
+
+#SUGGESTION 
+
+@TODO -
+	add this week's cost
+	add this month's cost
+
+
+@TODo
+/product/index
+work on advance search 
+
+
+
+@TODO 
+/materials/index
+work on new ui
+
+
+@TODO 
+/invoice/list
+make ui a bit more awesome
+
+
+@TODO - change UI/UX 
+/invoice/create
+
+
+@TODO - 
+/home 
+make ui more user friendly
+
+
 

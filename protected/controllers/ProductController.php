@@ -15,7 +15,6 @@ class ProductController extends Controller
     {
         return array(
             'accessControl', // perform access control for CRUD operations
-            'postOnly + delete', // we only allow deletion via POST request
         );
     }
 
@@ -59,7 +58,6 @@ class ProductController extends Controller
         if ($model) {
             if (Yii::app()->request->isPostRequest) {
                 $oldQuantity = intval($model->quantity);
-
                 /*run for n specified number off quantity to be added*/
                 for ($i=0; $i < intval($_POST['quantityToBeAdded']); $i++) {
                     $productRequirements = ProductRequirement::model()->findAllByAttributes(array('product_id'=>$product_id));
@@ -107,6 +105,7 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $this->layout = "product";
         $requiredMaterials = ProductRequirement::model()->findAllByAttributes(array("product_id"=>$id));
         $this->render('view', array(
             'model' => $this->loadModel($id),
@@ -120,38 +119,28 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout = "product";
         $model = new Product;
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
 
         if (isset($_POST['Product'])) {
             $model->attributes = $_POST['Product'];
-
             $uploadedFile = CUploadedFile::getInstance($model, 'image');
-
             if ($uploadedFile) {
-                /*generate random name*/
                 $model->image = sprintf("%s-%s", uniqid() . '-product-', $uploadedFile);
-                /*save model*/
-                // $model->save();
                 /*save the uploaded file to */
                 $uploadPath = Yii::getPathOfAlias("uploadedImage") . '/' . $model->image;
                 $uploadedFile->saveAs($uploadPath);
             }
-
             if ($model->isNewRecord && $model->save()) {
                 $this->redirect(array('/product/requirement', 'product_id' => $model->id));
             }else if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->id));
             }
-
         }else{
             if (empty($model->sku)) {
                 $model->sku = uniqid();
             }
         }
-
         $this->render('create', array(
             'model' => $model,
         ));
@@ -164,10 +153,8 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->layout = "materials";
         $model = $this->loadModel($id);
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
 
         if (isset($_POST['Product'])) {
             $oldImageVal = $model->image;
@@ -202,10 +189,8 @@ class ProductController extends Controller
     public function actionDelete($id)
     {
         $this->loadModel($id)->delete();
-
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if (!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        Yii::app()->user->setFlash("success","Record deleted");
+        $this->redirect($this->createAbsoluteUrl("product/index"));
     }
 
     /**
@@ -214,9 +199,15 @@ class ProductController extends Controller
     public function actionIndex()
     {
         $this->layout = "column1";
+        $searchModel = new Product('search');       
         $dataProvider = new CActiveDataProvider('Product');
+        if (isset($_GET['Product'])) {
+            $searchModel->attributes = $_GET['Product'];
+            $dataProvider = $searchModel->search();        
+        }
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ));
     }
 
@@ -225,6 +216,7 @@ class ProductController extends Controller
      */
     public function actionAdmin()
     {
+        $this->layout = "product";
         $model = new Product('search');
         $model->unsetAttributes(); // clear any default values
         if (isset($_GET['Product']))
@@ -242,15 +234,16 @@ class ProductController extends Controller
         $model = Product::model()->findByPk($product_id);
         if ($model) {
             if (Yii::app()->request->isPostRequest) {
-                /*@TODO - for each required material */
-                foreach ($_POST['required_material_id'] as $key => $value) {
-                    $new_product_requirement = new ProductRequirement;
-                    $new_product_requirement->product_id = $model->id;
-                    $new_product_requirement->material_id = $_POST['required_material_id'][$key];
-                    $new_product_requirement->quantity = $_POST['required_material_quantity'][$key];
-                    /*@TODO - save ProductRequirement*/
-                    $new_product_requirement->save();
+                if (isset($_POST['required_material_id'])) {
+                    foreach ($_POST['required_material_id'] as $key => $value) {
+                        $new_product_requirement = new ProductRequirement;
+                        $new_product_requirement->product_id = $model->id;
+                        $new_product_requirement->material_id = $_POST['required_material_id'][$key];
+                        $new_product_requirement->quantity = $_POST['required_material_quantity'][$key];
+                        $new_product_requirement->save();
+                    }                
                 }
+
                 Yii::app()->user->setFlash("success","Settings saved!");
                 $this->redirect(array('view', 'id' => $model->id));
             }

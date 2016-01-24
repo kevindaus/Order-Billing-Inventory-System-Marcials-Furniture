@@ -14,6 +14,7 @@ $this->menu=array(
 
 ?>
 
+
 <h1>Materials</h1>
 <hr>
 <div>
@@ -46,15 +47,12 @@ $this->menu=array(
 		'name',
 		'sku',
 		'description',
-		// 'image',
 		'quantity',
 		'cost',
 		'unit_measurement',
-		/*
-		'last_update',
-		*/
 		array(
 			'class'=>'CButtonColumn',
+			'header'=>'Action'
 		),
 	),
 )); ?>

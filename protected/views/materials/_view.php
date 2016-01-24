@@ -6,29 +6,12 @@ $baseUrl = Yii::app()->theme->baseUrl;
 
 ?>
 
+<?php
+    $this->beginWidget('application.libs.widgets.MaterialPortlet', array(
+        'material_model'=>$data,
+    ));
+?>
 
-<div class="view">
-<h1>
-    <div>
-        <div class="btn-group">
-          <a class="btn btn-primary" href="#">
-            <i class="icon-book icon-white"></i>
-            Action
-        </a>
-          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li>
-                <?php echo CHtml::link('<i class="icon-pencil"></i> Update', array('update','id'=>$data->id), array()); ?>
-            </li>
-            <li>
-                <?php echo CHtml::link('<i class="icon-trash"></i> Delete', array('delete','id'=>$data->id), array()); ?>
-            </li>
-          </ul>
-        </div>            
-    </div>
-
-</h1>
-<div class="">
     <div class="span3">
         <?php
         if (isset($data->image) && !empty($data->image)) {
@@ -44,19 +27,19 @@ $baseUrl = Yii::app()->theme->baseUrl;
         <?php $this->widget('zii.widgets.CDetailView', array(
             'data' => $data,
             'attributes' => array(
-				'name',
-				'sku',
-				'description',
-				// 'image',
+                'name',
+                'sku',
+                'description',
+                // 'image',
                 'quantity',
                 'unit_measurement',
-				'cost',
+                'cost',
             ),
         ));
         ?>
     </div>
     <div class="clearfix"></div>
-</div>
+<?php
+    $this->endWidget();
+?>
 
-
-</div>

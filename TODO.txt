@@ -134,14 +134,27 @@ products kusa mag mi minus sa matrials tapos bago magawa yung isang product naka
 
 @TODO - 
 add unit of measurement for material
-
+@DONE
 
 @TODO  -
 add price
 and label it cost
+@DONE
 
-ongoing 
-http://localhost:8080/index.php/materials/index
+@TODO - when resupplying add 
+the cost of current resupluied cost 
+to the record
+
+
+
+
+
+
+
+
+
+
+
 
 
 #SUGGESTION 
@@ -149,31 +162,6 @@ http://localhost:8080/index.php/materials/index
 @TODO -
 	add this week's cost
 	add this month's cost
-
-
-@TODo
-/product/index
-work on advance search 
-
-
-
-@TODO 
-/materials/index
-work on new ui
-
-
-@TODO 
-/invoice/list
-make ui a bit more awesome
-
-
-@TODO - change UI/UX 
-/invoice/create
-
-
-@TODO - 
-/home 
-make ui more user friendly
-
-
+	add this annualy cost
+	Total Cost
 

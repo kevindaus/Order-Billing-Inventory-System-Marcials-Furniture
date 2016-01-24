@@ -11,51 +11,63 @@ $this->menu=array(
 	array('label'=>'Manage Products', 'url'=>array('admin')),
 );
 
-$toggleAdvanceSearch = <<<EOL
-	$("#toggleAdvanceSearch").toggle(function() {
-		$("#advanceSearchForm").show();
-	}, function() {
-		/* Stuff to do every *even* time the element is clicked */
-		$("#advanceSearchForm").hide();
-	});
-
-	$("body").on('click', '#toggleAdvanceSearch', function(event) {
-		$("#toggleAdvanceSearch").toggle();
-	});
-
-
-
-EOL;
-Yii::app()->clientScript->registerScript('toggleAdvanceSearch', $toggleAdvanceSearch, CClientScript::POS_READY);
 ?>
 
 <div class="row-fluid">
 	<div class="span3" style="">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
-				'title'=>'<i class=\'icon-search\'></i> Search Product',
+				'title'=>'<i class=\'icon-search\'></i> Find Product',
 			));
 		?>
-			<?php echo CHtml::beginForm(array(), 'post', array('class'=>'form','style'=>"padding-left: 10px")); ?>
-				<br>
-				<label>Quick Search :</label>
-				<input class='quick-search-field' type="search" name="quick_search" value="" required="required" title="" placeholder='Search..'> <br>
-				<hr>
-				<a href="#" id="toggleAdvanceSearch">Advance search &raquo;</a>
-				<div id="advanceSearchForm" style="display:none">
-					@TODO
-				</div>
+			<?php echo CHtml::beginForm(array('/product/index'), 'GET', array()); ?>
+			<br>
+			<?php echo CHtml::activeLabelEx($searchModel, 'name', array()); ?>
+			<?php echo CHtml::activeTextField($searchModel, 'name', array()); ?>
+			<?php echo CHtml::activeLabelEx($searchModel, 'sku', array()); ?>
+			<?php echo CHtml::activeTextField($searchModel, 'sku', array()); ?>
+			<?php echo CHtml::activeLabelEx($searchModel, 'description', array()); ?>
+			<?php echo CHtml::activeTextField($searchModel, 'description', array()); ?>
+			<?php echo CHtml::activeLabelEx($searchModel, 'quantity', array()); ?>
+			<?php echo CHtml::activeTextField($searchModel, 'quantity', array()); ?>
+			<?php echo CHtml::activeLabelEx($searchModel, 'price', array()); ?>
+			<?php echo CHtml::activeTextField($searchModel, 'price', array()); ?>
+			<button type='submit' class='btn btn-primary'><span class='icon-white icon-search'></span> Search</button>
 			<?php echo CHtml::endForm(); ?>
-			
 		<?php
 			$this->endWidget();
 		?>
 	</div>
 	<div class="span9">
+		<?php
+		$this->widget('bootstrap.widgets.TbAlert', array(
+		    'fade'=>true, // use transitions?
+		    'closeText'=>'×', // close link text - if set to false, no close link is displayed
+		    'alerts'=>array( // configurations per alert type
+			    'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+			    'info'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+			    'warning'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+		    ),
+		)); ?>
+
 		<h1>
-			<img src="//icons.iconarchive.com/icons/custom-icon-design/flatastic-5/64/Product-sale-report-icon.png">
+			<?php echo CHtml::image(Yii::app()->theme->baseUrl.'/img/Product-sale-report-icon.png', '', array()); ?>
 			All Products
+			<small><?php echo CHtml::link('[create new]', array('create')); ?></small>
 		</h1>
+		<hr>
+		<div class="pull-right">
+		</div>
+		<div class="pullrt-left">
+			<div class="btn-group">
+				<?php echo CHtml::link("<span class='icon icon-list-alt'></span> List", array("index"), array('class'=>'btn btn-default')); ?>
+				<?php echo CHtml::link("<span class='icon  icon-th'></span> Grid", array("admin"), array('class'=>'btn btn-default','prompt'=>"Are you sure you want to delete this record ?")); ?>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<br>
+		<br>
+		
 
 		<?php $this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$dataProvider,

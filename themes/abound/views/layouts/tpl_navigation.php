@@ -28,8 +28,17 @@ Yii::app()->clientScript->registerCss('topNavClass', '
                     'encodeLabel'=>false,
                     'items'=>array(
                         array('label'=>'Dashboard', 'url'=>array('/site/index'),'visible'=>!Yii::app()->user->isGuest),
-                        array('label'=>'Product', 'url'=>array('/product/index'),'visible'=>!Yii::app()->user->isGuest),
-                        array('label'=>'Materials', 'url'=>array('/materials/index'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Product <span class="caret"></span>', 'url'=>'#','visible'=>!Yii::app()->user->isGuest,'itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+                        'items'=>array(
+                            array('label'=>'List all ', 'url'=>Yii::app()->createUrl("product/index")),
+                              array('label'=>'Add new ', 'url'=>Yii::app()->createUrl("product/create")),
+                        )),                                                
+
+                        array('label'=>'Materials <span class="caret"></span>', 'url'=>'#','visible'=>!Yii::app()->user->isGuest,'itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+                        'items'=>array(
+                            array('label'=>'List all ', 'url'=>Yii::app()->createUrl("materials/index")),
+                              array('label'=>'Add new ', 'url'=>Yii::app()->createUrl("materials/create")),
+                        )),                                                
                         array('label'=>'Invoices <span class="caret"></span>', 'url'=>'#','visible'=>!Yii::app()->user->isGuest,'itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
                         'items'=>array(
                             array('label'=>'List invoices ', 'url'=>Yii::app()->createUrl("invoice/list")),

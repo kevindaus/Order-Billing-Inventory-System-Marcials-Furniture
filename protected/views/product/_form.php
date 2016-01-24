@@ -18,27 +18,32 @@
 		)
 	
 )); ?>
-
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
 	<?php echo $form->errorSummary($model); ?>
-
+	<hr>
 	<div class="row">
-		<?php echo $form->labelEx($model,'sku'); ?>
-		<?php echo $form->textField($model,'sku',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'sku'); ?>
+		<div class="span4">
+			<?php echo $form->labelEx($model,'sku'); ?>
+			<?php echo $form->textField($model,'sku',array('size'=>60,'maxlength'=>255)); ?>
+			<?php echo $form->error($model,'sku'); ?>			
+		</div>
+		<div class="span4">
+			<?php echo $form->labelEx($model,'name'); ?>
+			<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
+			<?php echo $form->error($model,'name'); ?>
+		</div>
+		<div class="span4">
+			<?php echo $form->labelEx($model,'price'); ?>
+			<?php echo $form->numberField($model,'price'); ?>
+			<?php echo $form->error($model,'price'); ?>			
+		</div>
 	</div>
-
 	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textArea($model,'description',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'description'); ?>
+		<div class="span12">
+			<?php echo $form->labelEx($model,'description'); ?>
+			<?php echo $form->textArea($model,'description',array('class'=>"span12",'size'=>60,'maxlength'=>255)); ?>
+			<?php echo $form->error($model,'description'); ?>
+		</div>
 	</div>
 
 	<?php if ($model->isNewRecord): ?>
@@ -48,12 +53,6 @@
 			<?php echo $form->error($model,'quantity'); ?>
 		</div>
 	<?php endif ?>
-	<div class="row">
-		<?php echo $form->labelEx($model,'price'); ?>
-		<?php echo $form->numberField($model,'price'); ?>
-		<?php echo $form->error($model,'price'); ?>
-	</div>
-
 	<div class="row">
 		<?php echo $form->labelEx($model,'image'); ?>
 		<?php echo $form->fileField($model,'image',array('size'=>60,'maxlength'=>255)); ?>

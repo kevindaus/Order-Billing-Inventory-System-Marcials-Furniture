@@ -13,7 +13,5 @@ $this->menu=array(
 );
 ?>
 
-
 <legend>Create Material Record</legend>
-
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

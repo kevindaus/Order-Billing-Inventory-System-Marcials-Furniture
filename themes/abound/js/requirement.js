@@ -13,6 +13,7 @@
                 $scope.requiredProductCollection.push({
                     material_id : currentSelectedMaterial.id,
                     material_name : currentSelectedMaterial['name'],
+                    unit_measurement : currentSelectedMaterial['unit_measurement'],
                     quantity : currentQuantity,
                 });                    
                 console.log(currentQuantity);
@@ -26,7 +27,7 @@
             $http.post("/materials/json")
                 .then(function(response){
                     $scope.materials = response.data;
-                }, function(){
+                 }, function(){
                     alert('Error: Cant retrieve materials data');
                 });
     }

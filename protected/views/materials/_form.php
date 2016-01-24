@@ -46,12 +46,6 @@
 	<hr>
 	<div class="row">
 		<div class="span4">
-			<?php echo $form->labelEx($model,'sku'); ?>
-			<?php echo $form->textField($model,'sku',array('size'=>60,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'sku'); ?>
-		
-		</div>
-		<div class="span4">
 			<?php echo $form->labelEx($model,'quantity'); ?>
 			<?php echo $form->textField($model,'quantity'); ?>
 			<?php echo $form->error($model,'quantity'); ?>
@@ -80,7 +74,7 @@
 	<br>
 	<div class="row">
 		<?php echo $form->labelEx($model,'image'); ?>
-		<?php echo $form->fileField($model,'image',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->fileField($model,'image'); ?>
 		<?php echo $form->error($model,'image'); ?>
 	</div>
 

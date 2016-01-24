@@ -19,24 +19,25 @@ $baseUrl = Yii::app()->theme->baseUrl;
 
 
 ?>
-<div style="margin-left: 33px;"> 
 
-<div class="row">
-    <div class="span8">
-        <h1>View Product <small><?php echo $model->name; ?></small></h1>
-        <?php
-            $this->widget('bootstrap.widgets.TbAlert', array(
-                'fade'=>true, 
-                'closeText'=>'×',
-                'alerts'=>array(
-                    'error'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'),
-                    'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'),
-                ),
-            )); 
-        ?>
-    </div>
-</div>
-<div class="row">
+<?php
+$this->widget('bootstrap.widgets.TbAlert', array(
+    'fade'=>true, // use transitions?
+    'closeText'=>'×', // close link text - if set to false, no close link is displayed
+    'alerts'=>array( // configurations per alert type
+        'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+        'info'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+        'warning'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+    ),
+)); ?>
+
+
+
+<?php
+    $this->beginWidget('application.libs.widgets.MaterialPortlet', array(
+        'material_model'=>$model,
+    ));
+?>
     <div class="span3">
         <?php
             if (isset($model->image) && !empty($model->image)) {
@@ -62,25 +63,29 @@ $baseUrl = Yii::app()->theme->baseUrl;
         ));
         ?>
     </div>
-</div>
-<div class='row'>
+    <div class="clearfix"></div>
+    <div class=''>
     <h3>Required materials : </h3>
-    <ul>
-        <?php foreach ($requiredMaterials as $key => $currentRequiredMaterial): ?>
-            <li>
-                <h4>
-                    <?php echo $currentRequiredMaterial->material->name ?> 
-                    - 
-                    <small>
-                    <?php 
-                        echo $currentRequiredMaterial->quantity 
-                    ?> piece(s)
-                    </small>
-                    
-                </h4>
-            </li>
-        <?php endforeach ?>
-    </ul>
-</div>
+        <ul>
+            <?php foreach ($requiredMaterials as $key => $currentRequiredMaterial): ?>
+                <li>
+                    <h4>
+                        <?php echo $currentRequiredMaterial->material->name ?> 
+                        - 
+                        <small>
+                        <?php 
+                            echo sprintf("%s %s", $currentRequiredMaterial->quantity , $currentRequiredMaterial->material->unit_measurement) 
+                        ?>
+                        </small>
+                        
+                    </h4>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    </div>
 
-</div>
+
+
+<?php
+    $this->endWidget();
+?>

@@ -80,7 +80,7 @@ h1,h2,h3,h4, .portlet > .portlet-decoration, .sidebar-nav > ul > li > a, .navbar
 
 }
 .portlet-content{
-	padding:5px;
+	padding:20px;
 }
 
 /* end Portlets*/

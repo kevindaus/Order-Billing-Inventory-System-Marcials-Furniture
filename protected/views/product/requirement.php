@@ -39,7 +39,7 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/requirement.js', CCli
 						<li ng-repeat="(current_required_product_key, current_required_product) in requiredProductCollection">
 							<input type="hidden" name="required_material_id[]" class="form-control" value="{{current_required_product.material_id}}">
 							<input type="hidden" name="required_material_quantity[]" class="form-control" value="{{current_required_product.quantity}}">
-							{{current_required_product.material_name}} - <strong>{{current_required_product.quantity}} piece/s</strong>
+							{{current_required_product.material_name}} - <strong>{{current_required_product.quantity}} {{current_required_product.unit_measurement}}</strong>
 							<button type="button" class="btn btn-link" ng-click="indexCtrl.removeRequiredMaterial(current_required_product_key)">remove</button>
 						</li>
 					</ul>

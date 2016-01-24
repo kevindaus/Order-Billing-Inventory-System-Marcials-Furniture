@@ -6,7 +6,7 @@ class MaterialsController extends Controller
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-    public $layout = '//layouts/materials';
+    public $layout = '//layouts/column1';
 
     /**
      * @return array action filters
@@ -53,6 +53,7 @@ class MaterialsController extends Controller
      */
     public function actionView($id)
     {
+        $this->layout = "materials";
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -91,10 +92,6 @@ class MaterialsController extends Controller
     {
         $this->layout = "materials";
         $model = new Materials;
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
         if (isset($_POST['Materials'])) {
             $model->attributes = $_POST['Materials'];
 
@@ -110,6 +107,7 @@ class MaterialsController extends Controller
                 $uploadedFile->saveAs($uploadPath);
             }
             if ($model->save()) {
+                Yii::app()->user->setFlash("success","New material record created");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }else{
@@ -130,10 +128,8 @@ class MaterialsController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->layout = "materials";
         $model = $this->loadModel($id);
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
 
         if (isset($_POST['Materials'])) {
             $oldImageVal = $model->image;
@@ -171,15 +167,8 @@ class MaterialsController extends Controller
     public function actionDelete($id)
     {
         $this->loadModel($id)->delete();
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if (!isset($_GET['ajax'])){
-            $referrer = Yii::app()->request->getUrlReferrer(true);
-            if (isset($referrer) && !is_null($referrer)) {
-                $this->redirect(Yii::app()->request->referrer);
-            }else{
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-            }
-        }
+        Yii::app()->user->setFlash("success","Record deleted");
+        $this->redirect($this->createAbsoluteUrl("materials/index"));
     }
 
     /**
@@ -187,10 +176,15 @@ class MaterialsController extends Controller
      */
     public function actionIndex()
     {
-
+        $searchModel = new Materials('search');
         $dataProvider = new CActiveDataProvider('Materials');
+        if (  isset($_GET['Materials'])  ) {
+            $searchModel->attributes = $_GET['Materials'];
+            $dataProvider = $searchModel->search();
+        }
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ));
     }
 
@@ -199,6 +193,7 @@ class MaterialsController extends Controller
      */
     public function actionAdmin()
     {
+        $this->layout = "materials";
         $model = new Materials('search');
         $model->unsetAttributes(); // clear any default values
         if (isset($_GET['Materials'])){

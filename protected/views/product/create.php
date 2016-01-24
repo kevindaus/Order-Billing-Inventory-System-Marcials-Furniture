@@ -13,6 +13,5 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Product</h1>
-
+<legend>Create Product Record</legend>
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

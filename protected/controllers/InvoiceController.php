@@ -56,11 +56,15 @@ class InvoiceController extends Controller
     public function actionAllOldCustomers()
     {
         header("Content-Type: application/json");
-        $allOldCustomers = Customer::model()->findAll();
-        echo CJSON::encode($allOldCustomers);
+        $criteria = new CDbCriteria;
+        $criteria->distinct = true;
+        $allRes = Yii::app()->db->createCommand("select * from tbl_customer group by concat(title,' ',firstname,' ',middlename,' ',lastname)")->queryAll();
+        // $allOldCustomers = Customer::model()->findAll($criteria);
+        echo CJSON::encode($allRes);
     }
     public function actionCreate(){
         $this->layout = "invoice";
+
         $customerModels = Customer::model()->findAll();
         $customerNames = array();
         foreach ($customerModels as $key => $value) {

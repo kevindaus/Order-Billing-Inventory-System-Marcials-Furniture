@@ -65,7 +65,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
     </div>
     <div class="clearfix"></div>
     <div class=''>
-    <h3>Required materials : </h3>
+    <h3>Required materials <?php echo CHtml::link('[Add More]', array('/product/requirement','product_id'=>$model->id)); ?> </h3>
         <ul>
             <?php foreach ($requiredMaterials as $key => $currentRequiredMaterial): ?>
                 <li>

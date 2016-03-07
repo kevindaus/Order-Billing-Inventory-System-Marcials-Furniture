@@ -6,6 +6,7 @@
     invoiceModule.controller('IndexCtrl', ['$scope', '$http','$timeout', function ($scope, $http,$timeout) {
         var baseUrl = window.BASEURL;
         var currentController = this;
+        $scope.oldCustomers = [];
         $scope.purchaseLabelStr = "Purchase";
         $scope.errorAssistPurchase = "";
         $scope.isSendingPurchaseRequest = false;
@@ -44,13 +45,16 @@
             "contact_number": "",
             'isValid':function(){
                 var isValidRet = true;
+                console.log(this.firstname);
+                console.log(this.middlename);
+                console.log(this.lastname);
                 if(
                     this.firstname === '' ||
                     this.firstname == undefined ||
                     this.firstname == null ||
-                    this.middlename=== '' ||
-                    this.middlename == undefined ||
-                    this.middlename == null ||
+                    // this.middlename=== '' ||
+                    // this.middlename == undefined ||
+                    // this.middlename == null ||
                     this.lastname=== '' ||
                     this.lastname == undefined ||
                     this.lastname == null
@@ -92,6 +96,26 @@
             /*compute tax using 0.5%   */
         });
 
+
+
+        currentController.openOldCustomerDialog = function(){
+            $("#oldCustomer").dialog("open"); return false;
+        }
+        // currentController.loadSelectedOldCustomer = function(){
+        //     var custName = jQuery("#city").val();
+        //     console.log('loading old customer');
+        //     $http({
+        //       method: 'GET',
+        //       url: "/invoice/getCustomerInfo?customerName="+custName
+        //     }).then(function successCallback(response) {
+        //         $scope.customerModel = response.data;
+        //         $("#oldCustomer").dialog("close");
+        //       }, function errorCallback(response) {
+        //         console.log("Sorry cant load customer information")
+        //         $("#oldCustomer").dialog("close");
+        //       });
+        // }
+
         currentController.changeTax = function () {
             var newTax = prompt("Enter new tax (percentrage)", "0.5");
             newTax = parseFloat(newTax);
@@ -101,6 +125,30 @@
                 alert('Invalid tax input');
             }
         }
+
+
+        currentController.loadAllOldCustomers = function(){
+            $http.get("/invoice/allOldCustomers")
+                .then(function (response) {
+                    $scope.oldCustomers = response.data;
+
+                }, function () {
+                    alert("Failed to retrieve list of old customers");
+                });
+        }
+
+        currentController.loadAllOldCustomers();
+
+        currentController.loadOldCustomerInformation = function(currentCustomerToLoad){
+            // $scope.customerModel = currentCustomerToLoad;
+            $scope.customerModel.title = currentCustomerToLoad.title;
+            $scope.customerModel.firstname = currentCustomerToLoad.firstname;
+            $scope.customerModel.middlename = currentCustomerToLoad.middlename;
+            $scope.customerModel.lastname = currentCustomerToLoad.lastname;
+            $scope.customerModel.contact_number = currentCustomerToLoad.contactNumber;
+            $("#oldCustomer").dialog("close");
+        }
+
         currentController.changeShippingCost = function () {
             var shipping = prompt("Enter cost of shipping", "0");
             shipping = parseFloat(shipping);
@@ -252,6 +300,9 @@
         currentController.getProductList();
 
     }]);
+
+
+    
 
 
 }());

@@ -23,7 +23,7 @@ class InvoiceController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('index','list','create','save','print','view'),
+                'actions' => array('index','list','create','save','print','view','getCustomerInfo','allOldCustomers'),
                 'users' => array('@'),
             ),
             array('deny',
@@ -53,10 +53,35 @@ class InvoiceController extends Controller
         }
         $this->render('list', array('model'=>$model));
     }
-
+    public function actionAllOldCustomers()
+    {
+        header("Content-Type: application/json");
+        $allOldCustomers = Customer::model()->findAll();
+        echo CJSON::encode($allOldCustomers);
+    }
     public function actionCreate(){
         $this->layout = "invoice";
-        $this->render('create');
+        $customerModels = Customer::model()->findAll();
+        $customerNames = array();
+        foreach ($customerModels as $key => $value) {
+            $customerNames[] = array(
+                    'id'=>$value->id,
+                    'label'=>sprintf("%s %s %s %s" , $value->title , $value->firstname , $value->middlename , $value->lastname)
+                );
+        }
+        $this->render('create',compact('customerNames'));
+    }
+    public function actionGetCustomerInfo($customerName)
+    {
+        $criteria = new CDbCriteria;
+        $criteria->compare("concat(title,' ',firstName,' ',middleName,' ',lastName)",$customerName);
+        $model = Customer::model()->find($criteria);
+        if ($model) {
+            header("Content-Type: application/json");
+            echo json_encode($model->attributes);
+        }else{
+            throw new CHttpException(404,"Customer doesnt exists");
+        }
     }
     public function actionForm()
     {

@@ -14,7 +14,7 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/node_modules/angular/ang
 /*include ng-message*/
 Yii::app()->clientScript->registerScriptFile($baseUrl.'/node_modules/angular-messages/angular-messages.min.js', CClientScript::POS_END);
 
-
+	
 /*include angular datepicker*/
 Yii::app()->clientScript->registerCssFile($baseUrl.'/bower_components/angularjs-datepicker/dist/angular-datepicker.min.css');
 Yii::app()->clientScript->registerScriptFile($baseUrl.'/bower_components/angularjs-datepicker/dist/angular-datepicker.min.js', CClientScript::POS_END);
@@ -35,10 +35,75 @@ $dateToday = date("F d,Y");
 		color: red;
 	}
 </style>
+<script type="text/javascript">
+	function customerNameSelected (event, ui) {
+		jQuery.ajax({
+		  url: '/invoice/getCustomerInfo',
+		  type: 'GET',
+		  dataType: 'json',
+		  data: {
+		  	'customerId': ui.item.value
+	  	  },
+		  complete: function(xhr, textStatus) {
+		    //called when complete
+		  },
+		  success: function(data, textStatus, xhr) {
+		    //called when successful
+		    jQuery("#")
+		  },
+		  error: function(xhr, textStatus, errorThrown) {
+		    //called when there is an error
+		  }
+		});
+		
+	}
+
+</script>
+
+
+
+
+
 <br>
 <br>
 <div class="container" ng-app="InvoiceModule">
 	<div class="span11" ng-controller="IndexCtrl as indexCtrl">
+
+
+		<?php 
+
+			$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+			    'id'=>'oldCustomer',
+			    'options'=>array(
+			        'title'=>'Existing customer',
+			        'autoOpen'=>false,
+			        'modal'=>true,
+			        'width'=>500,
+			    ),
+			));
+		?>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Customer</th>
+						<th>Load Customer Info</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="(key, value) in oldCustomers">
+						<td>{{value.title}} {{value.firstname}} {{value.middlename}} {{value.lastname}}</td>
+						<td >
+							<button ng-click="indexCtrl.loadOldCustomerInformation(value)"  type="button" class="btn btn-default">Load</button >
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<?php 
+			$this->endWidget('zii.widgets.jui.CJuiDialog');
+		?>
+
+
 		<div class="row">
 			<center>
 				<h1>Create Invoice</h1>
@@ -73,9 +138,11 @@ $dateToday = date("F d,Y");
 					<div ng-messages="billToForm.bill_to_title.$error" role="alert">
 						<div ng-message="required"  class='required-field'>Please select a title</div>
 					</div>
-
 					<br>
-					<input ng-model="customerModel.firstname" type="text" name="bill_to_firstname" class="form-control" required placeholder='Firstname (*required)'> 
+					<div class="input-append">
+					  <input ng-model="customerModel.firstname" type="text" name="bill_to_firstname" class="form-control" required placeholder='Firstname (*required)'> 
+					  <button ng-click="indexCtrl.openOldCustomerDialog()" class="btn" type="button"><span class=" icon-user"></span>Load customer</button>
+					</div>					
 					<div ng-messages="billToForm.bill_to_firstname.$error" role="alert">
 						<div class='required-field' ng-message="required">This field is required</div>
 					</div>

@@ -237,13 +237,26 @@ class ProductController extends Controller
                 if (isset($_POST['required_material_id'])) {
                     foreach ($_POST['required_material_id'] as $key => $value) {
                         $new_product_requirement = new ProductRequirement;
-                        $new_product_requirement->product_id = $model->id;
-                        $new_product_requirement->material_id = $_POST['required_material_id'][$key];
-                        $new_product_requirement->quantity = $_POST['required_material_quantity'][$key];
-                        $new_product_requirement->save();
+                        $new_product_requirement->product_id = intval($model->id);
+                        $new_product_requirement->material_id = intval($_POST['required_material_id'][$key]);
+                        $new_product_requirement->quantity = intval($_POST['required_material_quantity'][$key]);
+                        // var_dump($new_product_requirement->attributes);
+                        // die();
+                        /* check if product requirement exists  with record material_id and product_id*/
+                        $criteria = new CDbCriteria;
+                        $criteria->compare("product_id",$model->id);
+                        $criteria->compare("material_id",$_POST['required_material_id'][$key]);
+                        /*if exists , update the quantity instead*/
+                        if (ProductRequirement::model()->exists($criteria)) {
+                            $oldProductRequirement = ProductRequirement::model()->find($criteria);
+                            $oldProductRequirement->quantity += intval($_POST['required_material_quantity'][$key]);
+                            $oldProductRequirement->save();
+                        }else{
+                            /*else save new */
+                            $new_product_requirement->save();
+                        }
                     }                
                 }
-
                 Yii::app()->user->setFlash("success","Settings saved!");
                 $this->redirect(array('view', 'id' => $model->id));
             }

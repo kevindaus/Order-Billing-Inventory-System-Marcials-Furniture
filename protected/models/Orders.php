@@ -124,7 +124,7 @@ class Orders extends CActiveRecord
 		$criteria->compare('order_date',$this->order_date,true);
 		$criteria->compare('date_created',$this->date_created,true);
 		$criteria->compare('date_updated',$this->date_updated,true);
-
+		$criteria->order = "date_created DESC";
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

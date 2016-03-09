@@ -156,6 +156,8 @@ class InvoiceDataPersistor {
                 /*decrease quantity of product*/
                 $productModel->quantity -= intval($currentProduct['quantity']);
                 $productModel->save();
+            }else{
+                throw new CHttpException(500,CHtml::errorSummary($newProductOrder));
             }
             /*add to collection */
             $productOrders[] = $newProductOrder;

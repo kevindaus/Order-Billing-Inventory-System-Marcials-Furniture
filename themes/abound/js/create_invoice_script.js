@@ -10,6 +10,7 @@
         $scope.purchaseLabelStr = "Purchase";
         $scope.errorAssistPurchase = "";
         $scope.isSendingPurchaseRequest = false;
+        $scope.isOldCustomerDialogOpened = false;
         $scope.shippingAddressModel = {
             "shipping_address_street": "",
             "shipping_address_city": "",
@@ -42,25 +43,9 @@
             "firstname": "",
             "middlename": "",
             "lastname": "",
-            "contact_number": "",
+            "contact_number": null,
             "address": "",
-            'isValid':function(){
-                var isValidRet = true;
-                if(
-                    this.firstname === '' ||
-                    this.firstname == undefined ||
-                    this.firstname == null ||
-                    // this.middlename=== '' ||
-                    // this.middlename == undefined ||
-                    // this.middlename == null ||
-                    this.lastname=== '' ||
-                    this.lastname == undefined ||
-                    this.lastname == null
-                ){
-                    isValidRet = false;
-                }
-                return isValidRet;
-            }
+            "isModelValid": false,
         }
         $scope.orderInformation = {
             "notes": "",
@@ -97,6 +82,7 @@
 
 
         currentController.openOldCustomerDialog = function(){
+            $scope.isOldCustomerDialogOpened = true;
             $("#oldCustomer").dialog("open"); return false;
         }
         // currentController.loadSelectedOldCustomer = function(){
@@ -129,7 +115,6 @@
             $http.get("/invoice/allOldCustomers")
                 .then(function (response) {
                     $scope.oldCustomers = response.data;
-
                 }, function () {
                     alert("Failed to retrieve list of old customers");
                 });
@@ -137,17 +122,51 @@
 
         currentController.loadAllOldCustomers();
 
-        currentController.loadOldCustomerInformation = function(currentCustomerToLoad){
-            console.log(currentCustomerToLoad);
-            var addressArr = currentCustomerToLoad.address.split(",");
-            $scope.customerModel.title = currentCustomerToLoad.title;
-            $scope.customerModel.firstname = currentCustomerToLoad.firstname;
-            $scope.customerModel.middlename = currentCustomerToLoad.middlename;
-            $scope.customerModel.lastname = currentCustomerToLoad.lastname;
-            $scope.customerModel.contact_number = currentCustomerToLoad.contactNumber;
-            $scope.shippingAddressModel.shipping_address_street = addressArr[0];
-            $scope.shippingAddressModel.shipping_address_city = addressArr[1];
 
+        $scope.$watch("customerModel",function(newvalue,oldvalue){
+            var addressArr = [];
+
+            if (newvalue && newvalue.address) {
+                addressArr = newvalue.address.split(","); 
+                $scope.shippingAddressModel.shipping_address_street = addressArr[0];
+                $scope.shippingAddressModel.shipping_address_city = addressArr[1];            
+            }else{
+                $scope.shippingAddressModel.shipping_address_street = "";
+                $scope.shippingAddressModel.shipping_address_city = "";
+            }
+            $scope.customerModel['title'] = newvalue['title'];
+            $scope.customerModel.firstname = newvalue.firstname;
+            $scope.customerModel.middlename = newvalue.middlename;
+            $scope.customerModel.lastname = newvalue.lastname;
+            console.log(newvalue);
+            if (newvalue.contact_number) {
+                $scope.customerModel.contact_number = parseFloat(newvalue.contact_number);
+            }
+            if (newvalue.contactNumber) {
+                $scope.customerModel.contact_number = parseFloat(newvalue.contactNumber);
+            }
+            
+
+            /*check customer model validity*/
+            if(
+                $scope.customerModel.firstname === '' ||
+                $scope.customerModel.firstname == undefined ||
+                $scope.customerModel.firstname == null ||
+                $scope.customerModel.lastname=== '' ||
+                $scope.customerModel.lastname == undefined ||
+                $scope.customerModel.lastname == null
+            ){
+                $scope.customerModel.isModelValid = false;
+            }else{
+                $scope.customerModel.isModelValid = true;
+            }
+
+        },true);
+
+
+
+        currentController.closeDialog = function(){
+            $scope.isOldCustomerDialogOpened = false;
             $("#oldCustomer").dialog("close");
         }
 

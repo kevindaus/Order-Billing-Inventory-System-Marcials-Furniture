@@ -48,10 +48,34 @@ class InvoiceController extends Controller
         $this->layout = "column2";
         $model= new Orders;
         $model->unsetAttributes();
+        $listDataProvider = null;
         if (isset($_POST['Orders'])) {
             $model->attributes = $_POST['Orders'];
         }
-        $this->render('list', array('model'=>$model));
+        if (isset($_POST['searchWhat'])) {
+            $criteria = new CDbCriteria;
+            if ($_POST['searchWhat'] === 'name') {
+                $criteria->compare("tbl_customer.title",$_POST['searchName'],true,"OR");
+                $criteria->compare("tbl_customer.firstname",$_POST['searchName'],true,"OR");
+                $criteria->compare("tbl_customer.middlename",$_POST['searchName'],true,"OR");
+                $criteria->compare("tbl_customer.lastname",$_POST['searchName'],true,"OR");
+                $criteria->join = "left join tbl_customer on tbl_customer.id = t.customer_id";
+                // $criteria->compare
+            }else if ($_POST['searchWhat'] === 'order_date') {
+                $dateFormatted = date("Y-m-d", strtotime($_POST['searchOrderDate']));
+                $criteria->addCondition("date(order_date) = '".$dateFormatted."'");
+            }
+            $listDataProvider = new CActiveDataProvider('Orders',array(
+                    'criteria'=>$criteria,
+                    'pagination'=>false,
+                ));
+            // print_r($listDataProvider->criteria);
+            // print_r($listDataProvider->data);
+            // die();
+        }else{
+            $listDataProvider = $model->search();
+        }
+        $this->render('list', array('model'=>$model,'listDataProvider'=>$listDataProvider));
     }
     public function actionAllOldCustomers()
     {

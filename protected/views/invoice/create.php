@@ -34,6 +34,9 @@ $dateToday = date("F d,Y");
 	.required-field {
 		color: red;
 	}
+	.ui-dialog-titlebar-close {
+	  visibility: hidden;
+	}	
 </style>
 <script type="text/javascript">
 	function customerNameSelected (event, ui) {
@@ -79,27 +82,16 @@ $dateToday = date("F d,Y");
 			        'autoOpen'=>false,
 			        'modal'=>true,
 			        'width'=>500,
+			        'closeOnEscape'=>false
 			    ),
 			));
 		?>
-			
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Customer</th>
-						<th>Load Customer Info</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="(key, value) in oldCustomers">
-						<td>{{value.title}} {{value.firstname}} {{value.middlename}} {{value.lastname}}</td>
-						<td >
-							<button ng-click="indexCtrl.loadOldCustomerInformation(value)"  type="button" class="btn btn-default">Load</button >
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
+		<legend>Search customer :</legend>
+		<input type="text" name="" ng-model="oldCustomerFilterText" class="span5" value="" placeholder="Quick filter" />
+		<br>
+		<select size="10" ng-model="customerModel" ng-options="currentOldCustomer as (currentOldCustomer.title+' '+currentOldCustomer.firstname+' '+currentOldCustomer.lastname) for currentOldCustomer in oldCustomers | filter:oldCustomerFilterText"  class='span5'>
+		</select>		
+		<button type="button" class="btn btn-default" ng-click="indexCtrl.closeDialog()">Done</button>
 		<?php 
 			$this->endWidget('zii.widgets.jui.CJuiDialog');
 		?>
@@ -148,7 +140,7 @@ $dateToday = date("F d,Y");
 						<div class='required-field' ng-message="required">This field is required</div>
 					</div>
 					<br>
-					<input ng-model="customerModel.middlename" type="text" name="bill_to_middlename"  class="form-control" required="required" title="" placeholder='Middlename (*required)'> 
+					<input ng-model="customerModel.middlename" type="text" name="bill_to_middlename"  class="form-control" title="" placeholder='Middlename (*required)'> 
 					<div ng-messages="billToForm.bill_to_middlename.$error" role="alert">
 						<div class='required-field' ng-message="required">This field is required</div>
 					</div>
@@ -158,7 +150,7 @@ $dateToday = date("F d,Y");
 						<div class='required-field' ng-message="required">This field is required</div>
 					</div>
 					<br>
-					<input ng-model="customerModel.contact_number" type="text" name="contact_number" class="form-control" placeholder='Contact number (optional)'> 
+					<input ng-model="customerModel.contact_number" type="number" min="0" max="99999999999" name="bill_to_contact_number" class="form-control" placeholder='Contact number (optional)'>
 					<br>
 				</form>
 			</div>
@@ -273,7 +265,7 @@ $dateToday = date("F d,Y");
 					<tfoot>
 						<tr class='well'>
 							<td>
-								<select class="form-control"  ng-model="currentOrderedProduct.product_name">
+								<select class="form-control"  ng-model="currentOrderedProduct.product_name" ng-change="indexCtrl.checkCustomerModelValidity()">
 									<option ng-repeat="(key, value) in productList" value="{{value.product_name}}">{{value.product_name}}</option>
 								</select>
 							</td>
@@ -375,7 +367,7 @@ $dateToday = date("F d,Y");
                     </strong>
                     <hr>
                     <ol>
-                        <li  ng-show="!customerModel.isValid()">
+                        <li  ng-show="!customerModel.isModelValid">
                             <small>
                                 Please provide some details on to whom the product/s will be delivered.
                             </small>
@@ -388,7 +380,8 @@ $dateToday = date("F d,Y");
                         </li>
                     </ol>
                 </div>
-				<button type="button" class="btn btn-default btn-block btn-primary" ng-disabled=" !(customerModel.isValid() && orderInformation.isValid() && shippingAddressModel.isValid() && !isSendingPurchaseRequest)" ng-click="indexCtrl.submitInvoice(shippingAddressModel,orderInformation,customerModel)">
+
+				<button type="button" class="btn btn-default btn-block btn-primary" ng-disabled=" !( customerModel.isModelValid && orderInformation.isValid() && shippingAddressModel.isValid() && !isSendingPurchaseRequest)" ng-click="indexCtrl.submitInvoice(shippingAddressModel,orderInformation,customerModel)">
                     {{purchaseLabelStr}}
                 </button>
 

@@ -82,6 +82,7 @@ $dateToday = date("F d,Y");
 			    ),
 			));
 		?>
+			
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -213,7 +214,13 @@ $dateToday = date("F d,Y");
 							    </datepicker>							
 							</td>
 							<td>
-								<input ng-init="orderInformation.order_date='<?php echo $dateToday ?>'" type="text" id="input" class="form-control" value="" required="required" title="" ng-model="orderInformation.order_date" ng-readonly="true">
+							 	<datepicker
+							      date-format="MMMM d,y"
+							      button-prev='<i class="fa fa-arrow-circle-left"></i>'
+							      button-next='<i class="fa fa-arrow-circle-right"></i>'>
+							      <input ng-model="orderInformation.order_date" type="text" class="font-fontawesome font-light radius3" placeholder="Choose a date"/>
+							    </datepicker>							
+
 							</td>
 						</tr>
 					</tbody>

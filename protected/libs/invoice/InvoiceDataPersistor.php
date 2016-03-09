@@ -171,6 +171,14 @@ class InvoiceDataPersistor {
         $customerModel->middlename = $rawPostedData['customerModel']['middlename'];
         $customerModel->lastname = $rawPostedData['customerModel']['lastname'];
         $customerModel->contactNumber = $rawPostedData['customerModel']['contact_number'];
+        $_shippingAddress_str = sprintf(
+            "%s , %s ,%s , %s",
+            $rawPostedData['shippingAddress']['shipping_address_street'],
+            $rawPostedData['shippingAddress']['shipping_address_city'],
+            $rawPostedData['shippingAddress']['shipping_address_province'],
+            $rawPostedData['shippingAddress']['shipping_address_country']
+        );
+        $customerModel->address = $_shippingAddress_str;
         if (!$customerModel->save()) {
             throw new Exception("Cant save the new customer . Reason : " . CHtml::errorSummary($customerModel));
         }

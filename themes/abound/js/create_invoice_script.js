@@ -43,11 +43,9 @@
             "middlename": "",
             "lastname": "",
             "contact_number": "",
+            "address": "",
             'isValid':function(){
                 var isValidRet = true;
-                console.log(this.firstname);
-                console.log(this.middlename);
-                console.log(this.lastname);
                 if(
                     this.firstname === '' ||
                     this.firstname == undefined ||
@@ -140,12 +138,16 @@
         currentController.loadAllOldCustomers();
 
         currentController.loadOldCustomerInformation = function(currentCustomerToLoad){
-            // $scope.customerModel = currentCustomerToLoad;
+            console.log(currentCustomerToLoad);
+            var addressArr = currentCustomerToLoad.address.split(",");
             $scope.customerModel.title = currentCustomerToLoad.title;
             $scope.customerModel.firstname = currentCustomerToLoad.firstname;
             $scope.customerModel.middlename = currentCustomerToLoad.middlename;
             $scope.customerModel.lastname = currentCustomerToLoad.lastname;
             $scope.customerModel.contact_number = currentCustomerToLoad.contactNumber;
+            $scope.shippingAddressModel.shipping_address_street = addressArr[0];
+            $scope.shippingAddressModel.shipping_address_city = addressArr[1];
+
             $("#oldCustomer").dialog("close");
         }
 

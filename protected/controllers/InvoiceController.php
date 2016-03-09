@@ -60,10 +60,12 @@ class InvoiceController extends Controller
                 $criteria->compare("tbl_customer.middlename",$_POST['searchName'],true,"OR");
                 $criteria->compare("tbl_customer.lastname",$_POST['searchName'],true,"OR");
                 $criteria->join = "left join tbl_customer on tbl_customer.id = t.customer_id";
+                $criteria->order = "t.order_date DESC";
                 // $criteria->compare
             }else if ($_POST['searchWhat'] === 'order_date') {
                 $dateFormatted = date("Y-m-d", strtotime($_POST['searchOrderDate']));
                 $criteria->addCondition("date(order_date) = '".$dateFormatted."'");
+                $criteria->order = "t.order_date DESC";
             }
             $listDataProvider = new CActiveDataProvider('Orders',array(
                     'criteria'=>$criteria,

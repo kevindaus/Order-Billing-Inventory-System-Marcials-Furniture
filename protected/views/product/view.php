@@ -57,8 +57,8 @@ $this->widget('bootstrap.widgets.TbAlert', array(
                 'description',
                 'quantity',
                 'price',
-                'date_created',
-                'date_updated',
+                // 'date_created',
+                // 'date_updated',
             ),
         ));
         ?>

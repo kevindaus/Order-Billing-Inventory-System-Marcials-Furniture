@@ -131,8 +131,10 @@
                 $scope.shippingAddressModel.shipping_address_street = addressArr[0];
                 $scope.shippingAddressModel.shipping_address_city = addressArr[1];            
             }else{
-                $scope.shippingAddressModel.shipping_address_street = "";
-                $scope.shippingAddressModel.shipping_address_city = "";
+                if ($scope.isOldCustomerDialogOpened) {
+                    $scope.shippingAddressModel.shipping_address_street = "";
+                    $scope.shippingAddressModel.shipping_address_city = "";
+                }
             }
             $scope.customerModel['title'] = newvalue['title'];
             $scope.customerModel.firstname = newvalue.firstname;

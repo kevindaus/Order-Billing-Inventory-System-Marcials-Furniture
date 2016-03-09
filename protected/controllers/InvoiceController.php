@@ -55,10 +55,7 @@ class InvoiceController extends Controller
         if (isset($_POST['searchWhat'])) {
             $criteria = new CDbCriteria;
             if ($_POST['searchWhat'] === 'name') {
-                $criteria->compare("tbl_customer.title",$_POST['searchName'],true,"OR");
-                $criteria->compare("tbl_customer.firstname",$_POST['searchName'],true,"OR");
-                $criteria->compare("tbl_customer.middlename",$_POST['searchName'],true,"OR");
-                $criteria->compare("tbl_customer.lastname",$_POST['searchName'],true,"OR");
+                $criteria->compare("concat(tbl_customer.title,' ',tbl_customer.firstname,' ',tbl_customer.lastname)",$_POST['searchName'],true,"OR");
                 $criteria->join = "left join tbl_customer on tbl_customer.id = t.customer_id";
                 $criteria->order = "t.order_date DESC";
                 // $criteria->compare

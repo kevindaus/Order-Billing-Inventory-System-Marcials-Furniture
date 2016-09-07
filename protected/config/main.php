@@ -81,6 +81,7 @@ return array(
         ),
         'authManager'=>array(
                 'class'=>'RDbAuthManager',
+                'rightsTable'=>'rights',
                 'connectionID'=>'db',
                 'defaultRoles'=>array('Authenticated', 'Guest'),
         ),

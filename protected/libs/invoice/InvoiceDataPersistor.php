@@ -104,13 +104,13 @@ class InvoiceDataPersistor {
     public function saveOrders(Customer $cust,$ordersInfo){
         $currentOrder = new Orders();
         $currentOrder->customer_id = $cust->id;
-        $currentOrder->sub_total =  $ordersInfo['orderInformation']['sub_total'];
-        $currentOrder->tax =  $ordersInfo['orderInformation']['tax'];
-        $currentOrder->shipping_amt =  $ordersInfo['orderInformation']['shipping'];
-        $currentOrder->total_amt =  $ordersInfo['orderInformation']['total'];
-        $currentOrder->paid =  $ordersInfo['orderInformation']['paid'];
-        $currentOrder->sales_person =  $ordersInfo['orderInformation']['sales_person'];
-        $currentOrder->invoice_number=  $ordersInfo['orderInformation']['invoice_number'];
+        $currentOrder->sub_total =  @$ordersInfo['orderInformation']['sub_total'];
+        $currentOrder->tax =  @$ordersInfo['orderInformation']['tax'];
+        $currentOrder->shipping_amt =  @$ordersInfo['orderInformation']['shipping'];
+        $currentOrder->total_amt =  @$ordersInfo['orderInformation']['total'];
+        $currentOrder->paid =  @$ordersInfo['orderInformation']['paid'];
+        $currentOrder->sales_person =  @$ordersInfo['orderInformation']['sales_person'];
+        $currentOrder->invoice_number=  @$ordersInfo['orderInformation']['invoice_number'];
         $_shippingAddress = sprintf(
             "%s , %s ,%s , %s",
             $ordersInfo['shippingAddress']['shipping_address_street'],
@@ -168,11 +168,11 @@ class InvoiceDataPersistor {
     private function saveCustomerInformation($rawPostedData)
     {
         $customerModel = new Customer();
-        $customerModel->title = $rawPostedData['customerModel']['title'];
-        $customerModel->firstname = $rawPostedData['customerModel']['firstname'];
-        $customerModel->middlename = $rawPostedData['customerModel']['middlename'];
-        $customerModel->lastname = $rawPostedData['customerModel']['lastname'];
-        $customerModel->contactNumber = $rawPostedData['customerModel']['contact_number'];
+        $customerModel->title = @$rawPostedData['customerModel']['title'];
+        $customerModel->firstname = @$rawPostedData['customerModel']['firstname'];
+        $customerModel->middlename = @$rawPostedData['customerModel']['middlename'];
+        $customerModel->lastname = @$rawPostedData['customerModel']['lastname'];
+        $customerModel->contactNumber = @$rawPostedData['customerModel']['contact_number'];
         $_shippingAddress_str = sprintf(
             "%s , %s ,%s , %s",
             $rawPostedData['shippingAddress']['shipping_address_street'],

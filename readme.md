@@ -7,26 +7,17 @@
 	Maricar Inventory System
 </h3>
 <p>
-	Features : <br>
-		* monthly report
-		* invoice creation
-		* invoice printing
-		* product and material management
-		* production notification = reports whether material is sufficient to create a product
+Features : <br>
+* monthly report
+<br>
+* invoice creation
+<br>
+* invoice printing
+<br>
+* product and material management
+<br>
+* production notification = reports whether material is sufficient to create a product
 </p>
-
-<hr>
-<h3>
-	Maricar Inventory System
-</h3>
-<p>
-	Inventory system implemented using Yii framework and angular js . 
-</p>
-
-<hr>
-<h3>
-	Maricar Inventory System
-</h3>
 <hr>
 ![Alt text](screenshots/screenshot1.PNG)
 ![Alt text](screenshots/screenshot2.PNG)

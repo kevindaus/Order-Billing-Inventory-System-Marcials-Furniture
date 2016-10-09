@@ -1,8 +1,3 @@
-
-
-
-
-
 <h3>
 	Maricar Inventory System
 </h3>
@@ -28,4 +23,3 @@ Features : <br>
 ![Alt text](screenshots/screenshot7.PNG)
 ![Alt text](screenshots/screenshot8.PNG)
 ![Alt text](screenshots/screenshot9.PNG)
-

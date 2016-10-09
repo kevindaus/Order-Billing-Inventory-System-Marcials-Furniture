@@ -1,21 +1,14 @@
 <?php
-
 /**
  * admin
  * admin
  */
-
-
-
 defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
-
-
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/framework/yii.php';
-$config=dirname(__FILE__).'/protected/config/main.php';
 $autoload = dirname(__FILE__).'/protected/vendor/autoload.php';
+$config=dirname(__FILE__).'/protected/config/main.php';
 
 define('DOMPDF_ENABLE_AUTOLOAD', false);
 

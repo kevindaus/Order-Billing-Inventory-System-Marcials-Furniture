@@ -6,3 +6,4 @@ data/
 *.bat
 protected/components/UserIdentity.php
 protected/vendor/
+/vendor/

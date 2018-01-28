@@ -1,4 +1,5 @@
 .phpintel/
+.idea/*
 themes/abound/uploads/*
 protected/runtime/*
 assets/*

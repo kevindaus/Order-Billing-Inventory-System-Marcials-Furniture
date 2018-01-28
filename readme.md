@@ -21,8 +21,30 @@ Features :
 
 ##### Windows
 1. Clone the project. ```git clone https://github.com/kevindaus/Order-Billing-Inventory-System-Marcials-Furniture.git``` 
-1. 
-1. Navigate to project directory and go to ```protected/```. 
+1. Edit ```protected/config/main.php``` . 
+1. Update database configuration .
+``` 
+'db'=>array(
+            'connectionString' => 'mysql:host=localhost;dbname=DATABASE_NAME',
+            'emulatePrepare' => true,
+            'username' => 'DATABASE_USERNAME',
+            'password' => 'DATABASE_PASSWORD',
+            'charset' => 'utf8',  
+        ),
+```
+4. Edit ```protected/config/console.php``` . 
+1. Update database configuration .
+``` 
+'db'=>array(
+            'connectionString' => 'mysql:host=localhost;dbname=DATABASE_NAME',
+            'emulatePrepare' => true,
+            'username' => 'DATABASE_USERNAME',
+            'password' => 'DATABASE_PASSWORD',
+            'charset' => 'utf8',  
+        ),
+```
+6. Navigate to project directory and go to ```protected/```. 
+6. Double click ```install.bat```. 
 
 
 ####== Frequently Asked Questions ==
@@ -31,67 +53,6 @@ Features :
 
 ####== Screenshots ==
 
-1. screenshot-1.jpg
-1. screenshot-1.jpg
-
-####== Changelog ==
-
-List versions from most recent at top to oldest at bottom.
-
-####== Upgrade Notice ==
-
-Upgrade notices describe the reason a user should upgrade. No more than 300 characters.
-
-####== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-####== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-			"Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up for **strong**.
-
-`<?php code(); // goes in backticks ?>`
-
-
-
-
-<h3>
-	Maricar Inventory System
-</h3>
-<p>
-Features : <br>
-* monthly report
-<br>
-* invoice creation
-<br>
-* invoice printing
-<br>
-* product and material management
-<br>
-* production notification = reports whether material is sufficient to create a product
-</p>
-<hr>
 ![Alt text](screenshots/screenshot1.PNG)
 ![Alt text](screenshots/screenshot2.PNG)
 ![Alt text](screenshots/screenshot3.PNG)
@@ -101,3 +62,11 @@ Features : <br>
 ![Alt text](screenshots/screenshot7.PNG)
 ![Alt text](screenshots/screenshot8.PNG)
 ![Alt text](screenshots/screenshot9.PNG)
+
+
+
+####== Changelog ==
+
+1.0 = initial release 
+
+####== Upgrade Notice ==

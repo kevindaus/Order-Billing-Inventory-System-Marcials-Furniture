@@ -4,6 +4,7 @@ class m151029_215707_create_product_table extends CDbMigration
 {
 	public function safeUp()
 	{
+		mkdir('../../assets');
 		$this->createTable("tbl_product",array(
 				"id"=>"pk",
 				"sku"=>"string not null",
@@ -18,6 +19,7 @@ class m151029_215707_create_product_table extends CDbMigration
 	}
 	public function safeDown()
 	{
+		rmdir('../../assets');
 		$this->dropTable("tbl_product");
 	}
 }
